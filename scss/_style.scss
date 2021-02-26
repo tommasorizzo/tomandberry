@@ -50,6 +50,16 @@
   }
 }
 
+.cd-icon {
+  margin-top: 0.6rem;
+  margin-right: 0.5rem;
+  text-align: right;
+  color: $txt-secondary;
+  @media (max-width: 580px)  {
+      visibility: hidden;
+}
+}
+
 // Cerimonia
 .chiesa {
   height: 300px;
