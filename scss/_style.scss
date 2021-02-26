@@ -7,7 +7,7 @@
 // Hero
 
 .hero {
-  min-height: 750px;
+  min-height: 700px;
   background: url('../img/ter.jpg') center center;
   background-size: cover;
   position: relative;
@@ -31,12 +31,44 @@
 
 // Countdown
 
-.cispo {
+.cd-title {
     font-family: 'Dancing Script';
     font-size: 60px;
+      color: $txt-primary;
 }
 
-.data {
+.cd-data {
     font-family: 'Dancing Script';
-    font-size: 30px;
+    font-size: 40px;
+  color: $txt-primary;
+}
+
+.cd-num {
+  color: $txt-secondary;
+  p {
+  color: $txt-secondary;
+  }
+}
+
+// Cerimonia
+.chiesa {
+  height: 300px;
+  background-image: url('../img/scroce.jpg');
+  background-position: center center;
+  background-size: cover;
+  background-color: rgba(73, 69, 69, 0.404);
+  background-blend-mode: multiply;
+  padding-top: 3rem;
+  position: relative;
+  text-align: center;
+  h3 {
+    color: whitesmoke;
+  }
+h5 {
+  color: #ffffff;
+    margin-bottom: 3rem;
+}
+ p {
+  color: #ffffff;
+}
 }

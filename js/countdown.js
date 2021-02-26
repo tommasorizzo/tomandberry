@@ -17,21 +17,21 @@ var x = setInterval(function () {
   var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
   if (days == 1)
-    var dd = ' giorno';
+    var dd = '<p>giorno</p>';
   else
-    var dd = ' giorni';
+    var dd = '<p>giorni</p>';
   if (hours == 1)
-    var hh = ' ora';
+    var hh = '<p>ora</p>';
   else
-    var hh = ' ore';
+    var hh = "<p>ore</p>";
   if (minutes == 1)
-    var mm = ' minuto';
+    var mm = '<p>minuto</p>';
   else
-    var mm = ' minuti';
+    var mm = '<p>minuti</p>';
   if (seconds == 1)
-    var ss = ' secondo';
+    var ss = '<p>secondo</p>';
   else
-    var ss = ' secondi';
+    var ss = '<p>secondi</p>';
   // Output the result
   document.getElementById("countdown-days").innerHTML = days + dd;
   document.getElementById("countdown-hours").innerHTML = hours + hh;
@@ -45,6 +45,6 @@ var x = setInterval(function () {
     document.getElementById("countdown-hours").innerHTML = 0;
     document.getElementById("countdown-minutes").innerHTML = 0;
     document.getElementById("countdown-seconds").innerHTML = 0;
-    document.getElementsByClassName("countdown-item").style.visibility = 'hidden';
+    document.getElementsByClassName("cd-item").style.visibility = 'hidden';
   }
 }, 1000);
