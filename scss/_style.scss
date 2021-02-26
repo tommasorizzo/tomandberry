@@ -1,0 +1,42 @@
+// Global
+
+.container {
+    max-width: 880px;
+}
+
+// Hero
+
+.hero {
+  min-height: 750px;
+  background: url('../img/ter.jpg') center center;
+  background-size: cover;
+  position: relative;
+@media (max-width: 580px) {
+      background-image: url('../img/ter_media.jpg');
+}
+}
+
+.navbar {
+  padding: 0 0;
+  background-color: rgba(56, 56, 56, 0.247);
+  width: auto;
+  margin: 0 auto;
+  transition: padding 300ms ease-in-out;
+}
+
+.container-nav {
+  padding: 15px 0;
+  width: 90%;
+}
+
+// Countdown
+
+.cispo {
+    font-family: 'Dancing Script';
+    font-size: 60px;
+}
+
+.data {
+    font-family: 'Dancing Script';
+    font-size: 30px;
+}
