@@ -55,17 +55,45 @@
 
     <section id="cerimonia">
         <div class="chiesa">
-            <div class="container chiesa-content align-content-top">
-                <h5>domenica 4 luglio 2021</h5>
-                <h3>Chiesa di Santa Croce in Fossabanda</h3>
-                <p>Piazza Santa Croce in Fossabanda, 12<br>56127 Pisa (PI)</p>
+            <div class="container chiesa-content align-items-center">
+                <h3 class="m-3">Chiesa di Santa Croce in Fossabanda</h3>
+                <p class="mb-3">Piazza Santa Croce in Fossabanda, 12<br>56127 Pisa (PI)</p>
+                <h3 class="mb-3">ore 16.30</h5>
+                    <button type="button" class="btn btn-outline-light p-2" data-bs-toggle="modal"
+                        data-bs-target="#mapModal">Mappa</button>
             </div>
         </div>
     </section>
-
+    <div class="modal fade" id="mapModal" tabindex="-1" aria-labelledby="mapModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="mapModalLabel">Santa Croce in Fossabanda</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body justify-content-center">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d4968.660146356698!2d10.401329842345099!3d43.719447772766024!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xd6e69d0cf8d3ad27!2sChiesa%20e%20convento%20di%20Santa%20Croce%20in%20Fossabanda!5e0!3m2!1sit!2sit!4v1614423343119!5m2!1sit!2sit"
+                        style="height: 450px; width: 640px; max-width: 100%; border: 0;" allowfullscreen=""
+                        loading="lazy"></iframe>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <a type="button" class="btn btn-outline-secondary" target="_blank"
+                        href="https://www.google.com/maps/place/Chiesa+e+convento+di+Santa+Croce+in+Fossabanda/@43.7119769,10.4126972,17z/data=!3m1!4b1!4m5!3m4!1s0x12d591948eabd433:0xd6e69d0cf8d3ad27!8m2!3d43.711973!4d10.4148859">
+                        Apri su Maps </a>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 
+<footer class="d-flex justify-content-center">
+    <div class="container">
+        © 2021, Tom and Berry.
+    </div>
+</footer>
+
 <script src="/js/bootstrap.bundle.min.js"></script>
-<script src="/js/countdown.js"></script>
+<script src="/js/functions.js"></script>
 
 </html>

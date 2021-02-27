@@ -7,8 +7,10 @@
 // Hero
 
 .hero {
-  min-height: 700px;
+  min-height: 500px;
   background: url('../img/ter.jpg') center center;
+    background-color: rgba(153, 147, 147, 0.267);
+  background-blend-mode: multiply;
   background-size: cover;
   position: relative;
 @media (max-width: 580px) {
@@ -25,7 +27,7 @@
 }
 
 .container-nav {
-  padding: 15px 0;
+  padding: 15px 15px;
   width: 90%;
 }
 
@@ -63,22 +65,24 @@
 // Cerimonia
 .chiesa {
   height: 300px;
+  width: auto;
   background-image: url('../img/scroce.jpg');
   background-position: center center;
   background-size: cover;
   background-color: rgba(73, 69, 69, 0.404);
   background-blend-mode: multiply;
-  padding-top: 3rem;
-  position: relative;
+  display: flex;
+  align-items: center;
+  // padding-top: 2rem;
+  // position: relative;
   text-align: center;
-  h3 {
+  h5, h3, p {
     color: whitesmoke;
   }
-h5 {
-  color: #ffffff;
-    margin-bottom: 3rem;
 }
- p {
-  color: #ffffff;
-}
+
+// Footer
+footer {
+  background-color: rgba(255, 240, 197, 0.534);
+  padding: 1rem;
 }
