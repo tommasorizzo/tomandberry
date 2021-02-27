@@ -29,10 +29,17 @@
 .container-nav {
   padding: 15px 15px;
   width: 90%;
+  display: inline-block;
 }
 
-// Countdown
+.nav-link {
+  font-size: large;
+}
+// Ci sposiamo
 
+.ci-sposiamo {
+  background-color: whitesmoke;
+}
 .cd-title {
     font-family: 'Dancing Script';
     font-size: 60px;
@@ -42,6 +49,12 @@
 .cd-data {
     font-family: 'Dancing Script';
     font-size: 40px;
+  color: $txt-primary;
+}
+
+.cd-time {
+    font-family: 'Dancing Script';
+    font-size: 30px;
   color: $txt-primary;
 }
 
