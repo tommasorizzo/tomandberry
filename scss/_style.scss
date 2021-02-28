@@ -1,20 +1,20 @@
 // Global
 
 .container {
-    max-width: 880px;
+  max-width: 880px;
 }
 
 // Hero
 .hero {
   min-height: 500px;
-  background: url('../img/ter.jpg') center center;
-    background-color: rgba(153, 147, 147, 0.267);
+  background: url("../img/ter.jpg") center center;
+  background-color: rgba(153, 147, 147, 0.267);
   background-blend-mode: multiply;
   background-size: cover;
   position: relative;
-@media (max-width: 580px) {
-      background-image: url('../img/ter_media.jpg');
-}
+  @media (max-width: 580px) {
+    background-image: url("../img/ter_media.jpg");
+  }
 }
 
 .navbar {
@@ -40,20 +40,20 @@
   background-color: whitesmoke;
 }
 .cd-title {
-    font-family: 'Dancing Script';
-    font-size: 60px;
-      color: $txt-primary;
+  font-family: "Dancing Script";
+  font-size: 60px;
+  color: $txt-primary;
 }
 
 .cd-data {
-    font-family: 'Dancing Script';
-    font-size: 40px;
+  font-family: "Dancing Script";
+  font-size: 40px;
   color: $txt-primary;
 }
 
 .cd-time {
-    font-family: 'Dancing Script';
-    font-size: 30px;
+  font-family: "Dancing Script";
+  font-size: 30px;
   color: $txt-primary;
 }
 
@@ -61,7 +61,7 @@
 .chiesa {
   height: 300px;
   width: auto;
-  background-image: url('../img/scroce.jpg');
+  background-image: url("../img/scroce.jpg");
   background-position: center center;
   background-size: cover;
   background-color: rgba(73, 69, 69, 0.404);
@@ -71,7 +71,9 @@
   // padding-top: 2rem;
   // position: relative;
   text-align: center;
-  h5, h3, p {
+  h5,
+  h3,
+  p {
     color: whitesmoke;
   }
 }
@@ -80,29 +82,30 @@
 .noi-2 {
   display: none;
 }
+
 .noi-2-part {
-    max-height:500px;
-    height:auto;
-    width:auto;
-    @media (max-width: 580px) {
-      max-width: 60%;
-      height:auto;
-      width:auto;
-}
+  max-height: 500px;
+  height: auto;
+  width: auto;
+  @media (max-width: 580px) {
+    max-width: 60%;
+    height: auto;
+    width: auto;
+  }
 }
 
 // Countdown
 .cd-num {
-text-align: center;
+  text-align: center;
   color: $txt-secondary;
   p {
-  color: $txt-secondary;
-  margin-bottom: 0;
+    color: $txt-secondary;
+    margin-bottom: 0;
   }
 }
 
 .cd-manc {
-text-align: center;
+  text-align: center;
   color: $txt-secondary;
   font-size: 20px;
 }
@@ -112,10 +115,10 @@ text-align: center;
   margin-right: 0.5rem;
   text-align: center;
   color: $txt-secondary;
-  @media (max-width: 580px)  {
+  @media (max-width: 580px) {
     padding-bottom: 1rem;
-      // visibility: hidden;
-}
+    // visibility: hidden;
+  }
 }
 
 // Footer
