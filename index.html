@@ -6,7 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/main.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <title>Tom and Berry</title>
 </head>
 
@@ -34,6 +33,7 @@
             </div>
         </nav>
     </section>
+
     <section id="ci sposiamo" class="ci-sposiamo pt-5 pb-5">
         <div class="container text-center position-relative">
             <div class="row cd-title justify-content-center p-2"> Ci sposiamo!</div>
@@ -68,7 +68,7 @@
                         loading="lazy"></iframe>
                 </div>
                 <div class="modal-footer justify-content-center">
-                    <a type="button" class="btn btn-outline-secondary" target="_blank"
+                    <a type="button" class="btn btn-outline-secondary p-2" target="_blank"
                         href="https://www.google.com/maps/place/Chiesa+e+convento+di+Santa+Croce+in+Fossabanda/@43.7119769,10.4126972,17z/data=!3m1!4b1!4m5!3m4!1s0x12d591948eabd433:0xd6e69d0cf8d3ad27!8m2!3d43.711973!4d10.4148859">
                         Apri su Maps </a>
                 </div>
@@ -76,11 +76,28 @@
         </div>
     </div>
 
-
+    <section id="noi2" class="noi-2 p-2 m-2">
+        <div class="container justify-content-center position-relative">
+            <div class="row text-center align-items-center">
+                <div class="col-md-6 pb-2">
+                    <img class="noi-2-part" src="/img/part.png" alt="Partecipazione">
+                </div>
+                <div class="noi-2-text col-md-6">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. In ut est sapien. Vestibulum ante ipsum
+                    primis in faucibus orci
+                    luctus et ultrices posuere cubilia curae; Nam sit amet aliquam nibh. Vestibulum accumsan mollis mi,
+                    tincidunt ornare
+                    libero sollicitudin non. Aliquam molestie nunc nibh. Etiam eu lacinia est. Nam ac placerat magna, at
+                    euismod mi.
+                    Curabitur et urna nisi.
+                </div>
+            </div>
+        </div>
+    </section>
 
     <section id="countdown">
-        <div class="row justify-content-center p-2">
-            <div class="cd-icon col-sm-2">
+        <div class="row justify-content-center align-items-center p-2 m-3">
+            <div class="cd-icon col-sm-1">
                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
                     class="bi bi-clock-history" viewBox="0 0 16 16">
                     <path
@@ -90,20 +107,21 @@
                         d="M7.5 3a.5.5 0 0 1 .5.5v5.21l3.248 1.856a.5.5 0 0 1-.496.868l-3.5-2A.5.5 0 0 1 7 9V3.5a.5.5 0 0 1 .5-.5z" />
                 </svg>
             </div>
-            <div class="cd-num col-2 col-sm-1" id="countdown-days"></div>
-            <div class="cd-num col-2 col-sm-1" id="countdown-hours"></div>
-            <div class="cd-num col-2 col-sm-1" id="countdown-minutes"></div>
+            <div class="cd-manc col col-lg-1">Manacano</div>
+            <div class="cd-num col col-lg-1" id="countdown-days"></div>
+            <div class="cd-num col col-lg-1" id="countdown-hours"></div>
+            <div class="cd-num col col-lg-1" id="countdown-minutes"></div>
         </div>
     </section>
+
+    <footer class="d-flex justify-content-center">
+        <div class="container">
+            © 2021, Tom and Berry.
+        </div>
+    </footer>
+
+    <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/countdown.js"></script>
 </body>
-
-<footer class="d-flex justify-content-center">
-    <div class="container">
-        © 2021, Tom and Berry.
-    </div>
-</footer>
-
-<script src="/js/bootstrap.bundle.min.js"></script>
-<script src="/js/functions.js"></script>
 
 </html>
