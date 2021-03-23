@@ -7,7 +7,7 @@
 p {
   font-size: $font-size-p;
   line-height: $base-line-height;
-  color: $primary;
+  color: $p-color;
 }
 
 h1 {
@@ -22,7 +22,7 @@ h2 {
 
 h3 {
   color: $h3-color;
-  font-size: $font-size-h4;
+  font-size: $font-size-h3;
   font-weight: $w-semibold;
   line-height: $base-line-height;
 }
@@ -59,7 +59,7 @@ h5 {
 }
 
 .container-nav {
-  padding: 15px 15px;
+  padding: 10px 10px;
   width: 90%;
   display: inline-block;
 }
@@ -106,7 +106,7 @@ h5 {
   // position: relative;
   text-align: center;
   h5,
-  h3,
+  h4,
   p {
     color: whitesmoke;
   }
@@ -155,8 +155,44 @@ h5 {
   }
 }
 
+// RSVP
+.rsvp-text {
+  margin-top: 10px;
+  padding-top: 2rem;
+  text-align: justify;
+  h4 {
+    color: rgb(33, 123, 175);
+  }
+}
+.rsvp-cont {
+  max-width: 700px;
+  button {
+    background-color: rgb(33, 123, 175) !important;
+  }
+}
+
+.thankyou_message {
+  margin-bottom: 15px;
+  margin-top: 15px;
+  color: rgb(83, 156, 83);
+  text-align: center;
+  font-size: 18px;
+  font-style: italic;
+}
 // Footer
+
+.contatti {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.cont-reb {
+  @media (min-width: 580px) {
+    text-align: end;
+  }
+}
 footer {
   background-color: rgba(255, 240, 197, 0.534);
   padding: 1rem;
+  margin-bottom: 10px;
 }
