@@ -1,7 +1,6 @@
 // check tabletop addin
 
-var publicSpreadsheetUrl =
-  "https://docs.google.com/spreadsheets/d/1SK6suT4QqC8VGKfD6pP0mdFFXLRCKyJp9E-ReMBd74c/";
+var publicSpreadsheetUrl = "https://docs.google.com/spreadsheets/d/1SK6suT4QqC8VGKfD6pP0mdFFXLRCKyJp9E-ReMBd74c/";
 
 function init() {
   Tabletop.init({
@@ -82,14 +81,8 @@ function showInfo(data, tabletop) {
           desc_prod +
           '</p> \
                     <div class="prezzo">' +
-          (disponibili_prod != "x"
-            ? "<div><p>Prezzo:</p><span>" + prezzo_prod + "</span></div>"
-            : "") +
-          (disponibili_prod != "x"
-            ? '<div><p>Disponibili:</p><span class="disponibili">' +
-              disponibili_prod +
-              "</span></div>"
-            : "") +
+          (disponibili_prod != "x" ? "<div><p>Prezzo:</p><span>" + prezzo_prod + "</span></div>" : "") +
+          (disponibili_prod != "x" ? '<div><p>Disponibili:</p><span class="disponibili">' + disponibili_prod + "</span></div>" : "") +
           (disponibili_prod != "x"
             ? '<div class="linea-quant"><p>Quantità:</p><button type="button" class="diminuisci" data-id="' +
               id_prod +
@@ -182,17 +175,13 @@ function showInfo(data, tabletop) {
 
 window.addEventListener("DOMContentLoaded", init);
 
-$(document).on(
-  "change input paste keyup mouseup click",
-  'input[type="number"].quant, .diminuisci, .aumenta',
-  function () {
-    id_prod = $(this).data("id");
+$(document).on("change input paste keyup mouseup click", 'input[type="number"].quant, .diminuisci, .aumenta', function () {
+  id_prod = $(this).data("id");
 
-    calcolaTotale(id_prod);
+  calcolaTotale(id_prod);
 
-    attrAddtoCart(id_prod);
-  }
-);
+  attrAddtoCart(id_prod);
+});
 
 function aumentaInput(input0) {
   if (!detectIE()) {
@@ -219,17 +208,11 @@ function calcolaTotale(id_prod) {
     .data("prezzo")
     .split(" ")[0];
 
-  disponibili = parseInt(
-    $('.info-prodotto[data-id="' + id_prod + '"]').data("disp")
-  );
+  disponibili = parseInt($('.info-prodotto[data-id="' + id_prod + '"]').data("disp"));
 
-  quant = parseFloat(
-    $('.info-prodotto[data-id="' + id_prod + '"] .prezzo .quant').val()
-  );
+  quant = parseFloat($('.info-prodotto[data-id="' + id_prod + '"] .prezzo .quant').val());
 
-  total =
-    $('.info-prodotto[data-id="' + id_prod + '"] .prezzo .quant').val() *
-    parseFloat(prezzo.replace(",", "."));
+  total = $('.info-prodotto[data-id="' + id_prod + '"] .prezzo .quant').val() * parseFloat(prezzo.replace(",", "."));
   total = total.toFixed(2);
 
   console.log("ID: " + id_prod);
@@ -242,27 +225,19 @@ function calcolaTotale(id_prod) {
   } else if (quant > disponibili) {
     $('.info-prodotto[data-id="' + id_prod + '"] .totale .tot').text("Errore");
   } else {
-    $('.info-prodotto[data-id="' + id_prod + '"] .totale .tot').text(
-      total.toLocaleString("it") + " €"
-    );
+    $('.info-prodotto[data-id="' + id_prod + '"] .totale .tot').text(total.toLocaleString("it") + " €");
   }
 }
 
 function attrAddtoCart(id_prod) {
   // aggiunge gli attributi al pulsante aggiungi al carrello
   quant = $('.info-prodotto[data-id="' + id_prod + '"] .quant').val();
-  $('.info-prodotto[data-id="' + id_prod + '"] .cart-add').attr(
-    "data-quantity",
-    quant
-  );
+  $('.info-prodotto[data-id="' + id_prod + '"] .cart-add').attr("data-quantity", quant);
   prezzo = $('.info-prodotto[data-id="' + id_prod + '"]')
     .data("prezzo")
     .split(" ")[0];
   prezzo = prezzo.replace(",", ""); // rimuove la virgola, il carello lo vuole così
-  $('.info-prodotto[data-id="' + id_prod + '"] .cart-add').attr(
-    "data-price",
-    prezzo
-  );
+  $('.info-prodotto[data-id="' + id_prod + '"] .cart-add').attr("data-price", prezzo);
 }
 
 $(document).on("click", ".aggiungi_cart", function () {
@@ -309,47 +284,24 @@ function disponibiliCart(id_prod) {
 
     disponibili_agg = disponibili - nelCarrello;
 
-    $('.info-prodotto[data-id="' + id_prod + '"] .prezzo .quant').attr(
-      "max",
-      disponibili_agg
-    );
+    $('.info-prodotto[data-id="' + id_prod + '"] .prezzo .quant').attr("max", disponibili_agg);
 
     if (nelCarrello >= disponibili) {
-      $('.info-prodotto[data-id="' + id_prod + '"] .aggiungi_cart').attr(
-        "disabled",
-        true
-      );
+      $('.info-prodotto[data-id="' + id_prod + '"] .aggiungi_cart').attr("disabled", true);
     } else {
-      $('.info-prodotto[data-id="' + id_prod + '"] .aggiungi_cart').attr(
-        "disabled",
-        false
-      );
+      $('.info-prodotto[data-id="' + id_prod + '"] .aggiungi_cart').attr("disabled", false);
     }
 
-    $('.info-prodotto[data-id="' + id_prod + '"] .disponibili').text(
-      disponibili_agg + " (" + nelCarrello + " già nel carrello)"
-    );
+    $('.info-prodotto[data-id="' + id_prod + '"] .disponibili').text(disponibili_agg + " (" + nelCarrello + " già nel carrello)");
 
-    min = $('.info-prodotto[data-id="' + id_prod + '"] .prezzo .quant').attr(
-      "min"
-    );
+    min = $('.info-prodotto[data-id="' + id_prod + '"] .prezzo .quant').attr("min");
     $('.info-prodotto[data-id="' + id_prod + '"] .prezzo .quant').val(min);
   } else {
-    $('.info-prodotto[data-id="' + id_prod + '"] .aggiungi_cart').attr(
-      "disabled",
-      false
-    );
-    $('.info-prodotto[data-id="' + id_prod + '"] .disponibili').text(
-      disponibili
-    );
-    $('.info-prodotto[data-id="' + id_prod + '"] .prezzo .quant').attr(
-      "max",
-      disponibili
-    );
+    $('.info-prodotto[data-id="' + id_prod + '"] .aggiungi_cart').attr("disabled", false);
+    $('.info-prodotto[data-id="' + id_prod + '"] .disponibili').text(disponibili);
+    $('.info-prodotto[data-id="' + id_prod + '"] .prezzo .quant').attr("max", disponibili);
 
-    min = $('.info-prodotto[data-id="' + id_prod + '"] .prezzo .quant').attr(
-      "min"
-    );
+    min = $('.info-prodotto[data-id="' + id_prod + '"] .prezzo .quant').attr("min");
     $('.info-prodotto[data-id="' + id_prod + '"] .prezzo .quant').val(min);
   }
 }
@@ -508,10 +460,7 @@ $("#infoPersonali-form-avanti").on("click", function () {
 
     $("#bonifico-importo").text(roundToTwo(totCart));
 
-    $("#paypalme").attr(
-      "href",
-      "https://www.paypal.me/andref/" + roundToTwo(totCart)
-    );
+    $("#paypalme").attr("href", "https://www.paypal.me/andref/" + roundToTwo(totCart));
 
     $("#stripe-total").text(roundToTwo(totCart));
     $("#stripe-fee").text(roundToTwo(totFee - totCart));
@@ -788,12 +737,7 @@ $("#infoPersonali-form-avanti").on("click", function () {
             console.log(data);
             $("#single_working").hide();
             $("#single_fail").show();
-            alert(
-              "Si è verificato un errore, riprova. " +
-                data.statusText +
-                " " +
-                data.status
-            );
+            alert("Si è verificato un errore, riprova. " + data.statusText + " " + data.status);
           },
         });
       } catch (err) {

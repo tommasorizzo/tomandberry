@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Tommaso e Rebecca</title>
+    <title>RSVP</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Sito web del nostro matrimonio!" />
@@ -47,13 +47,10 @@
           <div class="collapse navbar-collapse flex-grow-0" id="navbarNav">
             <ul class="navbar-nav">
               <li class="nav-item">
-                <a class="nav-link" href="index.html">Tom & Berry</a>
+                <a class="nav-link" href="index.html">Home</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="lista-nozze.html">Lista Nozze</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link active" href="rsvp.html">Conferma</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#foot">Contatti</a>
@@ -64,65 +61,67 @@
       </nav>
     </section>
 
-    <div class="container rsvp-text rsvp-cont">
-      Compila il form seguente <b><em>entro il 31 maggio 2021</em></b> per farci sapere se ci sarai alla cerimonia!
+    <div class="container rsvp-text">
+      Compila il form seguente <b><em>entro il 31 maggio 2021</em></b> per farci sapere se ci sarai al ricevimento!
       <br />
       <br />
       Comunicaci numero e nome di adulti (>10 anni), bambini (4-9 anni) e neonati (0-3 anni), comprese le eventuali intolleranze alimentari, per
       permetterci di dare tutte le informazioni al ristorante per tempo. Grazie!
-      <h4 class="mt-4 mb-3">RSVP</h4>
     </div>
     <form id="rsvp-form" action="https://script.google.com/macros/s/AKfycbzTKqXS_fO_60iCdhumPbRkWTnIyVnnCKDZPIY0rH-xnRGbSaE/exec" method="POST">
-      <div class="container form-elements rsvp-cont mt-3">
-        <div class="row mb-3">
-          <label for="email" class="col-sm-2 col-form-label">Email</label>
-          <div class="col-sm-10">
-            <input type="email" class="form-control" id="email" name="email" placeholder="Inserisci la tua email" required />
+      <div class="container rsvp-cont rounded-3 my-3">
+        <h4 class="py-2">RSVP</h4>
+        <div class="form-elements">
+          <div class="row mb-3">
+            <label for="email" class="col-sm-2 col-form-label">Email</label>
+            <div class="col-sm-10">
+              <input type="email" class="form-control" id="email" name="email" placeholder="Inserisci la tua email" required />
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-md-4 pb-2">
+              <label for="adulti" class="form-label">Adulti (> 10 anni)</label>
+              <input type="number" id="adulti" name="adulti" class="form-control" min="0" max="10" placeholder="1" required />
+            </div>
+            <div class="col-md-4 pb-2">
+              <label for="bambini" class="form-label">Bambini (4-9 anni)</label>
+              <input type="number" id="bambini" name="bambini" class="form-control" min="0" max="10" placeholder="0" required />
+            </div>
+            <div class="col-md-4 pb2">
+              <label for="neonati" class="form-label">Neonati (0-3 anni)</label>
+              <input type="number" id="neonati" name="neonati" class="form-control" min="0" max="10" placeholder="0" required />
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="nominativi" class="form-label">Nominativi</label>
+            <textarea
+              class="form-control"
+              id="nominativi"
+              name="nominativi"
+              rows="2"
+              placeholder="Inserisci tutti i nominativi separati da una virgola"
+              required
+            ></textarea>
+          </div>
+          <div class="mb-3">
+            <label for="intolleranze" class="form-label">Intolleranze alimentari</label>
+            <textarea
+              class="form-control"
+              id="intolleranze"
+              name="intolleranze"
+              rows="2"
+              placeholder="Comunicaci eventuali intolleranze alimentari"
+            ></textarea>
+          </div>
+          <div class="d-flex justify-content-center">
+            <button class="btn btn-primary mb-3">Vai!</button>
           </div>
         </div>
-        <div class="row mb-3">
-          <div class="col-md-4 pb-2">
-            <label for="adulti" class="form-label">Adulti (> 10 anni)</label>
-            <input type="number" id="adulti" name="adulti" class="form-control" min="0" max="10" placeholder="1" required />
-          </div>
-          <div class="col-md-4 pb-2">
-            <label for="bambini" class="form-label">Bambini (4-9 anni)</label>
-            <input type="number" id="bambini" name="bambini" class="form-control" min="0" max="10" placeholder="0" required />
-          </div>
-          <div class="col-md-4 pb2">
-            <label for="neonati" class="form-label">Neonati (0-3 anni)</label>
-            <input type="number" id="neonati" name="neonati" class="form-control" min="0" max="10" placeholder="0" required />
-          </div>
+        <!-- Customise the Thankyou Message People See when they submit the form: -->
+        <div class="container rsvp-cont thankyou_message py-2" style="display: none">
+          Grazie, abbiamo registrato la tua risposta. <br />
+          Per qualsiasi cosa non esitare a contattarci!
         </div>
-        <div class="mb-3">
-          <label for="nominativi" class="form-label">Nominativi</label>
-          <textarea
-            class="form-control"
-            id="nominativi"
-            name="nominativi"
-            rows="3"
-            placeholder="Inserisci tutti i nominativi separati da una virgola"
-            required
-          ></textarea>
-        </div>
-        <div class="mb-3">
-          <label for="intolleranze" class="form-label">Intolleranze alimentari</label>
-          <textarea
-            class="form-control"
-            id="intolleranze"
-            name="intolleranze"
-            rows="2"
-            placeholder="Comunicaci eventuali intolleranze alimentari"
-          ></textarea>
-        </div>
-        <div class="mb-3 d-flex justify-content-center">
-          <button class="btn btn-primary mb-3">Vai!</button>
-        </div>
-      </div>
-      <!-- Customise the Thankyou Message People See when they submit the form: -->
-      <div class="container rsvp-cont thankyou_message" style="display: none">
-        Grazie, abbiamo registrato la tua risposta. <br />
-        Per qualsiasi cosa non esitare a contattarci!
       </div>
     </form>
 
@@ -130,13 +129,13 @@
       <div class="container">
         <div class="contatti">Contatti</div>
         <div class="row">
-          <div class="col-sm py-2">
+          <div class="col-sm cont-tom">
             <b>Tommaso Rizzo</b> <br />
             via Hermada 15, Pisa <br />
             +39 328 4781581 <br />
             <a href="mailto:tommasorizzo@gmail.com">tommasorizzo@gmail.com</a>
           </div>
-          <div class="col-sm p-2 cont-reb">
+          <div class="col-sm cont-reb">
             <b>Rebecca D'Andrea</b> <br />
             via Garzella 4B, Cascina <br />
             +39 366 3279280 <br />
@@ -144,7 +143,7 @@
           </div>
         </div>
       </div>
-      <div class="container pt-5">© 2021, Tom and Berry.</div>
+      <div class="container credits">© 2021, Tom and Berry.</div>
     </footer>
 
     <script src="/js/bootstrap.bundle.min.js"></script>
