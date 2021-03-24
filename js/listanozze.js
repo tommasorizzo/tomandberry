@@ -24,7 +24,6 @@ function showInfo(results) {
   for (var i = 0, len = data.length; i < len; i++) {
     if (data[i]["mostra"] == "TRUE") {
       prodotto = data[i];
-      //console.log(prodotto);
 
       id_prod = prodotto["id"].toString();
       foto_prod = "/" + prodotto["foto"];

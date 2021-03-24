@@ -52,7 +52,15 @@ h5 {
     background-image: url("../img/ter_media.jpg");
   }
 }
-
+.hero-content {
+  padding-top: 40vh;
+  text-align: center;
+  img {
+    height: auto;
+    width: 400px;
+    max-width: 90%;
+  }
+}
 .navbar {
   padding: 0 0;
   background-color: rgba(56, 56, 56, 0.247);
@@ -175,6 +183,7 @@ h5 {
     color: rgb(33, 123, 175);
   }
   border: 1.5px solid rgb(33, 123, 175);
+  border-radius: 8px;
 }
 
 .thankyou_message {
