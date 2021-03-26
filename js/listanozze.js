@@ -1,12 +1,13 @@
 var listaSpreadsheet =
   "https://docs.google.com/spreadsheets/d/e/2PACX-1vSSl-43z0Ldx29JYwelRtThEfdbVs0GnMp6-s6imLUvIq7cQfbIlSXqyL0PU5CokSMtUFwWE1XJ87to/pub?gid=0&single=true&output=csv";
 
-var lista, cart, cartModal;
+var lista, cart, cartModal, footer;
 
 function init() {
   lista = document.getElementById("lista");
   cart = document.getElementById("cart");
   cartModal = document.getElementById("my-cart-modal");
+  footer = document.getElementById("foot");
 
   Papa.parse(listaSpreadsheet, {
     download: true,
@@ -17,9 +18,6 @@ function init() {
 
 function showInfo(results) {
   var data = results.data;
-
-  // data comes through as a simple array since simpleSheet is turned on
-  // alert("Successfully processed " + data.length + " rows!");
 
   lista.innerHTML = "";
 
@@ -39,19 +37,13 @@ function showInfo(results) {
               <div class="prod-grid"">
                 <img class="prod-foto" src="${foto_prod}" alt="" />
                 <h4 class="prod-name">${nome_prod}</h4>
-                <span class="prod-price">Prezzo: ${prezzo_prod}</span>
+                <span class="prod-price">Valore: ${prezzo_prod}</span>
                 <p class="prod-disp">Disponibili: ${disponibili_prod}</p>
               </div>
-              <div class="prod-quant">
-                <p>Quantità:</p>
-                <button type="button" class="quant-butt" onclick="lowerInput(this.nextElementSibling)">-</button>
-                <input class="quant-input" type="number" value="1" min="0" max="${disponibili_prod}">
-                <button type="button" class="quant-butt" onclick="increaseInput(this.previousElementSibling)">+</button>
-              </div>
-              <div class="prod-tot">
-                <div>Totale: <span class="tot"></span></div>
-                <button class="btn btn-primary add-cart">
-                  Regala
+              <div class="prod-buy">
+                <div style="display:none">Totale: <span class="tot" ></span></div>
+                <button class="btn btn-regala add-cart">
+                  <span class="svg-butt">Regala </span>
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gift" viewBox="0 0 16 16">
                     <path d="M3 2.5a2.5 2.5 0 0 1 5 0 2.5 2.5 0 0 1 5 0v.006c0 .07 0 .27-.038.494H15a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1v7.5a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 1 14.5V7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h2.038A2.968 2.968 0 0 1 3 2.506V2.5zm1.068.5H7v-.5a1.5 1.5 0 1 0-3 0c0 .085.002.274.045.43a.522.522 0 0 0 .023.07zM9 3h2.932a.56.56 0 0 0 .023-.07c.043-.156.045-.345.045-.43a1.5 1.5 0 0 0-3 0V3zM1 4v2h6V4H1zm8 0v2h6V4H9zm5 3H9v8h4.5a.5.5 0 0 0 .5-.5V7zm-7 8V7H2v7.5a.5.5 0 0 0 .5.5H7z"/>
                   </svg>
@@ -61,15 +53,6 @@ function showInfo(results) {
 
       lista.innerHTML += to_append;
     }
-  }
-
-  initTotal();
-
-  // Change quantity of product and update total
-  var quantityInputs = document.getElementsByClassName("quant-input");
-  for (var i = 0; i < quantityInputs.length; i++) {
-    var input = quantityInputs[i];
-    input.addEventListener("input", quantityChangedOnEvent);
   }
 
   // add to cart
@@ -88,94 +71,63 @@ function showInfo(results) {
 
 window.addEventListener("DOMContentLoaded", init);
 
-// init product total
-function initTotal() {
-  var quantityInputs = document.getElementsByClassName("quant-input");
-  for (var i = 0; i < quantityInputs.length; i++) {
-    var input = quantityInputs[i];
-    var product = input.parentElement.parentElement;
-    var quantity = input.value;
-    var price = retrieveTotal(product, "prod-price", 1);
-    var total = price * quantity;
-    product.getElementsByClassName("tot")[0].innerHTML = `${total} €`;
-  }
-}
-
-// change product quantity and update prod total
-function quantityChangedOnEvent(event) {
-  var input = event.target;
-  quantityChanged(input);
-}
-
-// lower and increase product quantity
-function lowerInput(input0) {
-  input0.stepDown();
-  quantityChanged(input0);
-}
-
-function increaseInput(input0) {
-  input0.stepUp();
-  quantityChanged(input0);
-}
-
-function quantityChanged(input) {
-  quantity = input.value;
-  var product = input.parentElement.parentElement;
-  var price = retrieveTotal(product, "prod-price", 1);
-  var total = price * quantity;
-  product.getElementsByClassName("tot")[0].innerHTML = `${total} €`;
-}
-
-// update cart total, disponibili and quant-input
-
+// add to cart and update cart total and disponibili
 function addToCart(event) {
-  var product = event.target.parentElement.parentElement;
-  var to_add = retrieveTotal(product, "tot", 0);
-  if (to_add == 0) {
-    alert("Niente da aggiungere!");
-    return;
-  } else {
-    updateCart(to_add, 1);
-    qty = product.getElementsByClassName("quant-input")[0].value;
-    updateDisp(product, qty, 0);
-    addItemToCart(product, qty);
-    if (new_disp <= 0) {
-      disableClassBtn(product, "add-cart"); // disable add to cart button
-    }
-  }
+  var product = event.target.parentNode.parentNode;
+  var to_add = retrieveTotal(product, "prod-price", 1);
+  addItemToCart(product, 1);
+  updateDisp(product, 1, 0);
+  updateCart();
 }
 
 // add row in cart displaying item
 function addItemToCart(product, quantity) {
+  // reitrieve product data
   var name = product.getElementsByClassName("prod-name")[0].innerHTML;
   var prod_id = product.id;
   var price = retrieveTotal(product, "prod-price", 1);
+  var disp = retrieveTotal(product, "prod-disp", 1);
   var foto = product.getElementsByClassName("prod-foto")[0].src;
+  // create div element
   var cartRow = document.createElement("div");
-  cartRow.classList.add("my-cart-row");
   var cartItems = document.getElementsByClassName("my-cart-items")[0];
-  var cartItemNames = cartItems.getElementsByClassName("my-cart-item");
-  for (var i = 0; i < cartItemNames.length; i++) {
-    cartItem = cartItemNames[i];
-    cartItemName = cartItem.getElementsByClassName("my-cart-item-name")[0].innerHTML;
-    if (cartItemName == name) {
-      old_qty = retrieveTotal(cartItem, "my-cart-item-quantity", 0);
-      cartItem.getElementsByClassName("my-cart-item-quantity")[0].innerHTML = old_qty + 1;
-      return;
+  var old_cart = retrieveTotal(cart, "cart-tot", 0);
+  if (old_cart != 0) {
+    // cart not empty
+    // check if element already present in cart
+    var cartItemNames = cartItems.getElementsByClassName("my-cart-item");
+    for (var i = 0; i < cartItemNames.length; i++) {
+      cartItem = cartItemNames[i];
+      cartItemName = cartItem.getElementsByClassName("my-cart-item-name")[0].innerHTML;
+      if (cartItemName == name) {
+        // if element already present in cart => update quantity
+        old_qty = cartItem.getElementsByClassName("quant-input")[0].value;
+        old_qty = parseFloat(old_qty);
+        cartItem.getElementsByClassName("quant-input")[0].value = old_qty + 1;
+        updateTotal(cartItem, old_qty + 1);
+        return;
+      }
     }
   }
+  cartRow.classList.add("my-cart-item");
+  cartRow.classList.add("row");
+  cartRow.setAttribute("id", "cart-" + prod_id);
   var cartRowContents = `
-                <div id="cart-${prod_id}" class="row my-cart-item">
-                  <img class="col-sm-3 my-cart-item-image" src="${foto}" />
-                  <span class="col-sm-5 my-cart-item-name pt-1">${name}</span>
-                  <div class="col justify-content-center pt-1">
-                    <span class="my-cart-item-quantity">${quantity}</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
-                      <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
-                    </svg>
-                    <span class="my-cart-price">${price} €</span>
+                  <div class="col-sm-7 my-cart-item-descr">
+                      <img class="col-sm-3 my-cart-item-image" src="${foto}" />
+                      <span class="col-sm-4 my-cart-item-name pt-1 ms-2">${name}</span>
                   </div>
-                </div>`;
+                  <div class="col-sm-5 pt-1 my-cart-item-quant">
+                      <button type="button" class="quant-butt" onclick="lowerInput(this.nextElementSibling)">-</button>
+                      <input readonly class="quant-input" type="number" value="1" min="0" max="${disp}">
+                      <button type="button" class="quant-butt" onclick="increaseInput(this.previousElementSibling)">+</button>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                      </svg>
+                      <span class="my-cart-item-price">${price} €</span>
+                  </div>
+                  <div class="my-cart-item-total" hidden>${price}</div>
+                `;
   cartRow.innerHTML = cartRowContents;
   cartItems.append(cartRow);
 }
@@ -183,25 +135,66 @@ function addItemToCart(product, quantity) {
 // update disp
 function updateDisp(product, quantity, direction) {
   old_disp = retrieveTotal(product, "prod-disp", 1);
+  if (old_disp == 0 && !direction) return; // attemp to go negative
   new_disp = direction ? old_disp + quantity : old_disp - quantity;
   product.getElementsByClassName("prod-disp")[0].innerHTML = `Disponibili: ${new_disp}`; // update disponibili
-  product.getElementsByClassName("quant-input")[0].max = new_disp; // update quant-input max
+  if (new_disp > 0) enableClassBtn(product, "add-cart");
+  else disableClassBtn(product, "add-cart"); // disable add to cart button
+  return;
+}
+
+// update total
+function updateTotal(cartItem, quantity) {
+  price = retrieveTotal(cartItem, "my-cart-item-price", 0);
+  total = quantity * price;
+  cartItem.getElementsByClassName("my-cart-item-total")[0].innerHTML = `${total}`;
+  updateCart();
 }
 
 // update cart
-function updateCart(value, direction) {
+function updateCart() {
   var old_cart = retrieveTotal(cart, "cart-tot", 0);
   if (old_cart == 0) {
     enableIdBtn("empty-cart"); // enable empty-cart button
   }
-  new_cart = direction ? old_cart + value : old_cart - value;
+  var new_cart = 0;
+  cartItems = document.getElementsByClassName("my-cart-item");
+  for (let i = 0; i < cartItems.length; i++) {
+    // sum all totals of items in cart
+    const cartItem = cartItems[i];
+    itemTotal = retrieveTotal(cartItem, "my-cart-item-total", 0);
+    new_cart += itemTotal;
+  }
   cart.getElementsByClassName("cart-tot")[0].innerHTML = `${new_cart} €`;
   cartModal.getElementsByClassName("cart-tot")[0].innerHTML = `${new_cart} €`;
+  if (new_cart == 0) {
+    disableIdBtn("empty-cart"); // disable empty-cart button
+  }
+}
+
+// lower and increase product quantity
+function lowerInput(input0) {
+  input0.stepDown();
+  quantityChanged(input0, 0);
+}
+
+function increaseInput(input0) {
+  input0.stepUp();
+  quantityChanged(input0, 1);
+}
+
+function quantityChanged(input, direction) {
+  quantity = input.value;
+  var cartItem = input.parentNode.parentNode;
+  updateTotal(cartItem, quantity);
+  prod_id = cartItem.id.split("-")[1];
+  product = document.getElementById(prod_id);
+  updateDisp(product, 1, !direction);
+  if (input.value == 0) cartItem.remove();
 }
 
 // empty cart
 function emptyCart() {
-  updateCart(retrieveTotal(cart, "cart-tot", 0), 0); // put cart total to 0
   disableIdBtn("empty-cart"); // disable empty cart button
   document.getElementById("my-cart-modal").style.display = "none";
   var cartItems = document.getElementsByClassName("my-cart-items")[0];
@@ -209,14 +202,16 @@ function emptyCart() {
   for (var i = cartItemNames.length - 1; i >= 0; i--) {
     // parse all cart items and restore disponibili
     cartItem = cartItemNames[i];
-    item_quantity = retrieveTotal(cartItem, "my-cart-item-quantity", 0);
+    item_quantity = cartItem.getElementsByClassName("quant-input")[0].value;
     prod_id = cartItem.id.split("-")[1];
     product = document.getElementById(prod_id);
-    updateDisp(product, item_quantity, 1);
+    updateDisp(product, parseFloat(item_quantity), 1);
     enableClassBtn(product, "add-cart");
-    cartItem.parentNode.remove();
+    cartItem.remove();
   }
+  updateCart(); // all items removed -> updateCart() returns 0
 }
+
 // checkout
 function checkout(event) {
   alert("Checkout!");
@@ -224,7 +219,6 @@ function checkout(event) {
 }
 
 // enable and disable buttons
-
 function disableClassBtn(product, classname) {
   product.getElementsByClassName(classname)[0].disabled = true;
 }
@@ -248,3 +242,18 @@ function retrieveTotal(target, classname, pos) {
     return total;
   }
 }
+
+// cart fixed position until footer
+function checkOffset() {
+  function getRectTop(el) {
+    var rect = el.getBoundingClientRect();
+    return rect.top;
+  }
+  if (getRectTop(cart) + document.body.scrollTop + cart.offsetHeight >= getRectTop(footer) + document.body.scrollTop - 10)
+    cart.style.position = "absolute";
+  if (document.body.scrollTop + window.innerHeight < getRectTop(footer) + document.body.scrollTop) cart.style.position = "fixed"; // restore when you scroll up
+}
+
+document.addEventListener("scroll", function () {
+  checkOffset();
+});

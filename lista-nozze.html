@@ -114,28 +114,35 @@
     <section id="lista" class="container lista-nozze my-4"></section>
 
     <section id="cart-row-and-modal">
-      <div class="container d-flex flex-row-reverse">
-        <div id="cart" class="my-cart position-fixed bottom-0" data-bs-toggle="modal" data-bs-target="#my-cart-modal">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gift-fill" viewBox="0 0 16 16">
+      <div class="container d-flex flex-row-reverse position-relative">
+        <div id="cart" class="my-cart" data-bs-toggle="modal" data-bs-target="#my-cart-modal">
+          <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-gift-fill" viewBox="0 0 16 16">
             <path
               d="M3 2.5a2.5 2.5 0 0 1 5 0 2.5 2.5 0 0 1 5 0v.006c0 .07 0 .27-.038.494H15a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h2.038A2.968 2.968 0 0 1 3 2.506V2.5zm1.068.5H7v-.5a1.5 1.5 0 1 0-3 0c0 .085.002.274.045.43a.522.522 0 0 0 .023.07zM9 3h2.932a.56.56 0 0 0 .023-.07c.043-.156.045-.345.045-.43a1.5 1.5 0 0 0-3 0V3zm6 4v7.5a1.5 1.5 0 0 1-1.5 1.5H9V7h6zM2.5 16A1.5 1.5 0 0 1 1 14.5V7h6v9H2.5z"
             />
           </svg>
-          <span class="cart-tot">0 €</span>
+          <span class="svg-butt cart-tot">0 €</span>
         </div>
       </div>
       <div class="modal fade" id="my-cart-modal" tabindex="-1" aria-labelledby="my-cart-modal-label" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Carrello</h5>
+              <h5 class="modal-title" id="exampleModalLabel">Le tue scelte</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body my-cart-items"></div>
             <div class="my-cart-total">TOTALE: <span class="cart-tot">0 €</span></div>
-            <div class="modal-footer">
-              <button id="empty-cart" type="button" class="btn btn-secondary" data-bs-dismiss="modal" disabled>Svuota carrello</button>
-              <button id="go-payment" type="button" class="btn btn-primary">Procedi al pagamento</button>
+            <div class="modal-footer my-cart-buttons">
+              <button id="empty-cart" type="button" class="btn btn-ricom" data-bs-dismiss="modal" disabled>Ricomincia</button>
+              <button id="go-payment" type="button" class="btn btn-regala-fill">
+                <span class="svg-butt">Regala!</span>
+                <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-gift-fill" viewBox="0 0 16 16">
+                  <path
+                    d="M3 2.5a2.5 2.5 0 0 1 5 0 2.5 2.5 0 0 1 5 0v.006c0 .07 0 .27-.038.494H15a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h2.038A2.968 2.968 0 0 1 3 2.506V2.5zm1.068.5H7v-.5a1.5 1.5 0 1 0-3 0c0 .085.002.274.045.43a.522.522 0 0 0 .023.07zM9 3h2.932a.56.56 0 0 0 .023-.07c.043-.156.045-.345.045-.43a1.5 1.5 0 0 0-3 0V3zm6 4v7.5a1.5 1.5 0 0 1-1.5 1.5H9V7h6zM2.5 16A1.5 1.5 0 0 1 1 14.5V7h6v9H2.5z"
+                  />
+                </svg>
+              </button>
             </div>
           </div>
         </div>
