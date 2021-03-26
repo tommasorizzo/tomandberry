@@ -338,28 +338,22 @@ button > * {
     text-align: end;
     .quant-input {
       height: 34px;
-      width: 2rem;
+      width: 1.6rem;
       border: none;
       margin: 0;
       padding: 0;
       text-align: center;
-      font-size: 14px;
+      font-size: 16px;
       // margin-left: 5px;
     }
     .quant-butt {
-      border: none;
-      border-radius: 100%;
-      font-size: 1rem;
-      width: 1.8rem;
-      height: 1.8rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      width: 22px;
+      height: 22px;
+      fill: rgb(236, 172, 89);
+      cursor: pointer;
       transition: all 0.5 ease;
       &:hover {
-        background-color: $primary;
-        color: whitesmoke;
-        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);
+        fill: rgb(184, 181, 181);
       }
     }
     svg {
@@ -369,6 +363,9 @@ button > * {
       text-align: center;
       justify-content: center;
     }
+  }
+  .my-cart-item-price {
+    font-size: 16px;
   }
   .my-cart-item-descr {
     text-align: start;
@@ -382,6 +379,7 @@ button > * {
 .my-cart-buttons {
   .btn {
     color: #fff;
+    height: 40px;
   }
   .btn-ricom {
     background: rgb(180, 180, 180);

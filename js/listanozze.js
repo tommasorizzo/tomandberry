@@ -118,9 +118,13 @@ function addItemToCart(product, quantity) {
                       <span class="col-sm-4 my-cart-item-name pt-1 ms-2">${name}</span>
                   </div>
                   <div class="col-sm-5 pt-1 my-cart-item-quant">
-                      <button type="button" class="quant-butt" onclick="lowerInput(this.nextElementSibling)">-</button>
+                      <svg xmlns="http://www.w3.org/2000/svg" onclick="lowerInput(this.nextElementSibling)" class="quant-butt bi bi-dash-circle-fill" viewBox="0 0 16 16">
+                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h7a.5.5 0 0 0 0-1h-7z"/>
+                      </svg>
                       <input readonly class="quant-input" type="number" value="1" min="0" max="${disp}">
-                      <button type="button" class="quant-butt" onclick="increaseInput(this.previousElementSibling)">+</button>
+                      <svg xmlns="http://www.w3.org/2000/svg" onclick="increaseInput(this.previousElementSibling)" class="quant-butt bi bi-plus-circle-fill" viewBox="0 0 16 16">
+                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
+                      </svg>
                       <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
                         <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
                       </svg>
@@ -128,6 +132,27 @@ function addItemToCart(product, quantity) {
                   </div>
                   <div class="my-cart-item-total" hidden>${price}</div>
                 `;
+
+  // var cartRowContents = `
+  //                 <div class="col-sm-7 my-cart-item-descr">
+  //                     <img class="col-sm-3 my-cart-item-image" src="${foto}" />
+  //                     <span class="col-sm-4 my-cart-item-name pt-1 ms-2">${name}</span>
+  //                 </div>
+  //                 <div class="col-sm-5 pt-1 my-cart-item-quant">
+  //                 <svg xmlns="http://www.w3.org/2000/svg" onclick="lowerInput(this.nextElementSibling)" class="quant-butt bi bi-plus-circle-fill" viewBox="0 0 16 16">
+  //                   <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
+  //                 </svg>
+  //                     <button type="button" class="quant-butt" onclick="lowerInput(this.nextElementSibling)">-</button>
+  //                     <input readonly class="quant-input" type="number" value="1" min="0" max="${disp}">
+  //                     <button type="button" class="quant-butt" onclick="increaseInput(this.previousElementSibling)">+</button>
+  //                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+  //                       <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+  //                     </svg>
+  //                     <span class="my-cart-item-price">${price} €</span>
+  //                 </div>
+  //                 <div class="my-cart-item-total" hidden>${price}</div>
+  //               `;
+
   cartRow.innerHTML = cartRowContents;
   cartItems.append(cartRow);
 }
