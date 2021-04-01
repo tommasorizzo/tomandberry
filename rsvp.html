@@ -24,6 +24,7 @@
     <meta name="msapplication-TileImage" content="ico/ms-icon-144x144.png" />
     <meta name="theme-color" content="#ffffff" />
     <link rel="stylesheet" href="css/main.min.css" />
+    <link rel="stylesheet" href="css/aos.css" />
   </head>
 
   <body>
@@ -69,7 +70,7 @@
       permetterci di dare tutte le informazioni al ristorante per tempo. Grazie!
     </div>
     <form id="rsvp-form" action="https://script.google.com/macros/s/AKfycbzTKqXS_fO_60iCdhumPbRkWTnIyVnnCKDZPIY0rH-xnRGbSaE/exec" method="POST">
-      <div class="container rsvp-cont my-3">
+      <div class="container rsvp-cont my-3" data-aos="zoom-out">
         <h4 class="py-2">RSVP</h4>
         <div class="form-elements">
           <div class="row mb-3">
@@ -149,5 +150,13 @@
 
     <script src="/js/bootstrap.bundle.min.js"></script>
     <script src="/js/form-rsvp.js"></script>
+    <script src="/js/aos.js"></script>
+    <script>
+      AOS.init({
+        duration: 1200,
+        easing: "ease-out-back",
+        delay: 100,
+      });
+    </script>
   </body>
 </html>
