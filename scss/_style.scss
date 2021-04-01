@@ -50,6 +50,16 @@ button > * {
   pointer-events: none;
 }
 
+.btn-orange {
+  border: 1px solid rgb(236, 172, 89);
+  color: rgb(236, 172, 89);
+  border-radius: 6px;
+  &:hover {
+    background: rgb(236, 172, 89);
+    color: #fff;
+  }
+}
+
 // Hero
 .hero {
   min-height: 500px;
@@ -109,7 +119,6 @@ button > * {
   font-family: "Dancing Script";
   font-size: 30px;
   color: $txt-primary;
-  display: none;
 }
 
 // Cerimonia
@@ -135,17 +144,55 @@ button > * {
 
 // Noi 2
 .noi-2 {
-  display: none;
+  background-image: url("../img/bg.png");
+  background-position: center center;
+  background-size: cover;
+  // display: none;
+  @media (max-width: 760px) {
+    background-image: none;
+  }
 }
 
 .noi-2-part {
-  max-height: 500px;
-  height: auto;
-  width: auto;
-  @media (max-width: 580px) {
-    max-width: 60%;
+  img {
+    max-height: 500px;
     height: auto;
     width: auto;
+    @media (max-width: 760px) {
+      max-width: 60%;
+      height: auto;
+      width: auto;
+    }
+  }
+  @media (max-width: 760px) {
+    background-image: url("../img/bg.png");
+    background-position: center center;
+    background-size: cover;
+  }
+}
+
+.noi-2-box {
+  padding: 1rem;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.8);
+  .noi-2-text {
+    text-align: start;
+  }
+  .noi-2-firme {
+    text-align: end;
+  }
+  span {
+    vertical-align: middle;
+  }
+  .svg-heart {
+    width: 16px;
+    height: 16px;
+    fill: rgb(192, 19, 19);
+  }
+  .svg-smile {
+    width: 20px;
+    height: 20px;
+    fill: rgb(228, 171, 17);
   }
 }
 
@@ -206,6 +253,10 @@ button > * {
 }
 
 // Lista Nozze
+#lista-nozze-go {
+  display: none;
+}
+
 .hero-ln {
   min-height: 500px;
   background: url("../img/braccia.jpg") center center;
@@ -218,7 +269,7 @@ button > * {
   font-size: large;
   font-style: italic;
   color: rgb(192, 19, 19);
-  display: none;
+  // display: none;
 }
 
 .lista-nozze {
@@ -270,6 +321,10 @@ button > * {
   }
 }
 
+#cart-row-and-modal {
+  display: none;
+}
+
 .my-cart {
   position: fixed;
   bottom: 2px;
@@ -290,16 +345,6 @@ button > * {
   &:hover {
     background: rgb(214, 138, 38);
     box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5);
-  }
-}
-
-.btn-regala {
-  border: 1px solid rgb(236, 172, 89);
-  color: rgb(236, 172, 89);
-  border-radius: 6px;
-  &:hover {
-    background: rgb(236, 172, 89);
-    color: #000;
   }
 }
 

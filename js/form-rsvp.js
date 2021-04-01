@@ -37,11 +37,6 @@
       }
     });
 
-    // // add form-specific values into the data
-    // formData.formDataNameOrder = JSON.stringify(fields);
-    // formData.formGoogleSheetName = form.dataset.sheet || "responses"; // default sheet name
-    // formData.formGoogleSendEmail = form.dataset.email || ""; // no email by default
-
     return { data: formData };
   }
 
@@ -50,7 +45,9 @@
     event.preventDefault(); // we are submitting via xhr below
     var form = event.target;
     var formData = getFormData(form);
+    console.log(formData);
     var data = formData.data;
+    console.log(data);
 
     disableAllButtons(form);
     var url = form.action;

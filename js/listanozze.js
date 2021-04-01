@@ -42,7 +42,7 @@ function showInfo(results) {
               </div>
               <div class="prod-buy">
                 <div style="display:none">Totale: <span class="tot" ></span></div>
-                <button class="btn btn-regala add-cart">
+                <button class="btn btn-orange add-cart">
                   <span class="svg-butt">Regala </span>
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gift" viewBox="0 0 16 16">
                     <path d="M3 2.5a2.5 2.5 0 0 1 5 0 2.5 2.5 0 0 1 5 0v.006c0 .07 0 .27-.038.494H15a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1v7.5a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 1 14.5V7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h2.038A2.968 2.968 0 0 1 3 2.506V2.5zm1.068.5H7v-.5a1.5 1.5 0 1 0-3 0c0 .085.002.274.045.43a.522.522 0 0 0 .023.07zM9 3h2.932a.56.56 0 0 0 .023-.07c.043-.156.045-.345.045-.43a1.5 1.5 0 0 0-3 0V3zM1 4v2h6V4H1zm8 0v2h6V4H9zm5 3H9v8h4.5a.5.5 0 0 0 .5-.5V7zm-7 8V7H2v7.5a.5.5 0 0 0 .5.5H7z"/>
@@ -66,7 +66,10 @@ function showInfo(results) {
   document.getElementById("empty-cart").addEventListener("click", emptyCart);
 
   // checkout
-  document.getElementById("go-payment").addEventListener("click", checkout);
+  var forms = document.querySelectorAll("#checkout-form");
+  for (var i = 0; i < forms.length; i++) {
+    forms[i].addEventListener("submit", handleFormSubmit, false);
+  }
 }
 
 window.addEventListener("DOMContentLoaded", init);
@@ -132,26 +135,6 @@ function addItemToCart(product, quantity) {
                   </div>
                   <div class="my-cart-item-total" hidden>${price}</div>
                 `;
-
-  // var cartRowContents = `
-  //                 <div class="col-sm-7 my-cart-item-descr">
-  //                     <img class="col-sm-3 my-cart-item-image" src="${foto}" />
-  //                     <span class="col-sm-4 my-cart-item-name pt-1 ms-2">${name}</span>
-  //                 </div>
-  //                 <div class="col-sm-5 pt-1 my-cart-item-quant">
-  //                 <svg xmlns="http://www.w3.org/2000/svg" onclick="lowerInput(this.nextElementSibling)" class="quant-butt bi bi-plus-circle-fill" viewBox="0 0 16 16">
-  //                   <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
-  //                 </svg>
-  //                     <button type="button" class="quant-butt" onclick="lowerInput(this.nextElementSibling)">-</button>
-  //                     <input readonly class="quant-input" type="number" value="1" min="0" max="${disp}">
-  //                     <button type="button" class="quant-butt" onclick="increaseInput(this.previousElementSibling)">+</button>
-  //                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
-  //                       <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
-  //                     </svg>
-  //                     <span class="my-cart-item-price">${price} €</span>
-  //                 </div>
-  //                 <div class="my-cart-item-total" hidden>${price}</div>
-  //               `;
 
   cartRow.innerHTML = cartRowContents;
   cartItems.append(cartRow);
@@ -238,9 +221,14 @@ function emptyCart() {
 }
 
 // checkout
-function checkout(event) {
-  alert("Checkout!");
-  return;
+function retrieveCartItems() {
+  var cartItems = document.getElementsByClassName("my-cart-items")[0];
+  var cartItemNames = cartItems.getElementsByClassName("my-cart-item");
+  for (var i = cartItemNames.length - 1; i >= 0; i--) {
+    cartItem = cartItemNames[i];
+    quantity = cartItem.getElementsByClassName("quant-input")[0].value;
+    id = cartItem.id.split("-")[1];
+  }
 }
 
 // enable and disable buttons
@@ -282,3 +270,91 @@ function checkOffset() {
 document.addEventListener("scroll", function () {
   checkOffset();
 });
+
+/********************** CHECKOUT **********************/
+// get all data in form and return object
+function getFormData(form) {
+  var elements = form.elements;
+  console.log(elements);
+  var fields = Object.keys(elements)
+    .map(function (k) {
+      if (elements[k].name !== undefined) {
+        return elements[k].name;
+        // special case for Edge's html collection
+      } else if (elements[k].length > 0) {
+        return elements[k].item(0).name;
+      }
+    })
+    .filter(function (item, pos, self) {
+      return self.indexOf(item) == pos && item;
+    });
+
+  var formData = {};
+  fields.forEach(function (name) {
+    var element = elements[name];
+
+    // singular form elements just have one value
+    formData[name] = element.value;
+
+    // when our element has multiple items, get their values
+    if (element.length) {
+      var data = [];
+      for (var i = 0; i < element.length; i++) {
+        var item = element.item(i);
+        if (item.checked || item.selected) {
+          data.push(item.value);
+        }
+      }
+      formData[name] = data.join(", ");
+    }
+  });
+
+  // retrieve cart items
+  retrieveCartItems();
+
+  return { data: formData };
+}
+
+function handleFormSubmit(event) {
+  // handles form submit without any jquery
+  event.preventDefault(); // we are submitting via xhr below
+  var form = event.target;
+  var formData = getFormData(form);
+  console.log(formData);
+  var data = formData.data;
+  console.log(data);
+
+  // disableAllButtons(form);
+  // var url = form.action;
+  // var xhr = new XMLHttpRequest();
+  // xhr.open("POST", url);
+  // // xhr.withCredentials = true;
+  // xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+  // xhr.onreadystatechange = function () {
+  //   if (xhr.readyState === 4 && xhr.status === 200) {
+  //     form.reset();
+  //     var formElements = form.querySelector(".form-elements");
+  //     if (formElements) {
+  //       formElements.style.display = "none"; // hide form
+  //     }
+  //     var thankYouMessage = form.querySelector(".thankyou_message");
+  //     if (thankYouMessage) {
+  //       thankYouMessage.style.display = "block";
+  //     }
+  //   }
+  // };
+  // // url encode form data for sending as post data
+  // var encoded = Object.keys(data)
+  //   .map(function (k) {
+  //     return encodeURIComponent(k) + "=" + encodeURIComponent(data[k]);
+  //   })
+  //   .join("&");
+  // xhr.send(encoded);
+}
+
+function disableAllButtons(form) {
+  var buttons = form.querySelectorAll("button");
+  for (var i = 0; i < buttons.length; i++) {
+    buttons[i].disabled = true;
+  }
+}
