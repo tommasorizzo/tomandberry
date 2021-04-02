@@ -24,10 +24,11 @@
     <meta name="msapplication-TileImage" content="ico/ms-icon-144x144.png" />
     <meta name="theme-color" content="#ffffff" />
     <link rel="stylesheet" href="css/main.min.css" />
+    <link rel="stylesheet" href="css/aos.css" />
   </head>
 
   <body>
-    <section class="hero-ln">
+    <section class="hero-ln" data-aos="flip-up">
       <div class="container mb-5 pb-2">
         <nav class="navbar navbar-expand-lg fixed-top navbar-dark">
           <div class="container container-nav">
@@ -162,8 +163,11 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              <!-- <form id="checkout-form" action="" method="POST"> -->
-              <form id="checkout-form" onSubmit="return confirm('Vuoi procedere?');">
+              <form
+                id="checkout-form"
+                method="POST"
+                action="https://script.google.com/macros/s/AKfycbyvku580rPv3k7pwzOSkeuyes_Jh67U83a043SjQM7VwLREY-A/exec"
+              >
                 <div class="container mb-3">
                   <div class="form-elements">
                     <div class="row mb-3">
@@ -173,20 +177,16 @@
                       </div>
                     </div>
                     <div class="row mb-3">
-                      <label for="nome" class="col-sm-2 col-form-label">Nome</label>
-                      <div class="col-sm-4">
-                        <input class="form-control" id="nome" name="nome" placeholder="Nome" required />
-                      </div>
-                      <label for="cognome" class="col-sm-2 col-form-label">Cognome</label>
-                      <div class="col-sm-4">
-                        <input class="form-control" id="cognome" name="cognome" placeholder="Cognome" required />
+                      <label for="nome" class="col-sm-4 col-form-label">Nome e Cognome</label>
+                      <div class="col-sm-8">
+                        <input class="form-control" id="nome" name="nome" placeholder="Nome e cognome" required />
                       </div>
                     </div>
-                    <div class="mb-3">
+                    <div class="row mb-3">
                       <label for="messaggio" class="form-label">Inserisci un messaggio:</label>
                       <textarea class="form-control" id="messaggio" name="messaggio" rows="3" placeholder="Scrivi qualcosa..."></textarea>
                     </div>
-                    <div class="mb-3">
+                    <div class="row mb-3">
                       <div class="form-check">
                         <input class="form-check-input" type="radio" name="metodo" id="radio-bonifico" value="bonifico" checked />
                         <label class="form-check-label" for="radio-bonifico"> Bonifico </label>
@@ -196,30 +196,56 @@
                         <label class="form-check-label" for="radio-paypal"> Paypal </label>
                       </div>
                     </div>
+                    <div class="confirm-body" style="display: none">
+                      Hai scelto di utilizzare <span class="method-confirm" style="font-style: italic">Bonifico</span>. Vuoi continuare? <br />
+                      Così facendo confermerai la tua scelta!
+                    </div>
                   </div>
                 </div>
               </form>
+              <div class="container thankyou_message_cart py-2" style="display: none">
+                Vi ringraziamo di cuore per il vostro contributo. <br />
+                Un'email con il riepilogo dei regali vi arriverà all'indirizzo inserito. <br />
+                Avete scelto di pagare tramite <span class="method-confirm">Bonifico</span>.
+                <div class="scelta-box">
+                  <div class="container scelta-bonifico py-3">
+                    Ecco le nostre coordinate bancarie: <br />
+                    <div class="text-center">
+                      Intestato a: D'Andrea Rebecca, Rizzo Tommaso <br />
+                      IBAN: IT06O0344216000000016053679
+                    </div>
+                  </div>
+                  <div class="container scelta-paypal py-3" style="display: none">
+                    Potete procedere al pagamento al seguente link: <a href="https://paypal.me/tomrizz0">paypal.me/tomrizz0</a>.
+                  </div>
+                </div>
+                Per qualsiasi cosa non esitate a contattarci!
+              </div>
             </div>
             <div class="modal-footer my-cart-buttons">
-              <button
-                id="back-to-cart"
-                type="button"
-                class="btn btn-ricom"
-                data-bs-dismiss="modal"
-                data-bs-toggle="modal"
-                data-bs-target="#my-cart-modal"
-              >
-                Indietro
-              </button>
-              <!-- <button id="go-checkout" type="button" class="btn btn-regala-fill" data-bs-toggle="modal" data-bs-target="#confirm-modal">
-                Conferma
-              </button> -->
-              <button id="go-checkout" type="submit" form="checkout-form" class="btn btn-regala-fill">Conferma</button>
+              <div class="checkout-btn">
+                <button
+                  id="back-to-cart"
+                  type="button"
+                  class="btn btn-ricom"
+                  data-bs-dismiss="modal"
+                  data-bs-toggle="modal"
+                  data-bs-target="#my-cart-modal"
+                >
+                  Indietro
+                </button>
+                <button id="go-checkout" class="btn btn-regala-fill" onclick="confirmfinish();">Conferma</button>
+              </div>
+              <div class="confirm-btn" style="display: none">
+                <button type="button" class="btn btn-ricom" onclick="confirm_no();">No</button>
+                <button type="submit" form="checkout-form" class="btn btn-regala-fill">Si!</button>
+              </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="modal fade" id="confirm-modal" tabindex="-1" aria-labelledby="confirm-label" aria-hidden="true">
+
+      <!-- <div class="modal fade" id="confirm-modal" tabindex="-1" aria-labelledby="confirm-label" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
             <div class="modal-header">
@@ -229,7 +255,7 @@
             <div class="modal-body confirm-body">
               Hai scelto di pagare con ***metodo***. Sei sicuro di voler continuare? <br />
               Così facendo confermerai la tua scelta!
-              <!-- Customise the Thankyou Message People See when they submit the form: -->
+
               <div class="container thankyou_message py-2" style="display: none">
                 Ti ringraziamo tanto per il regalo. <br />
                 Un'email di avvenuta registrazione ti arriverà all'indirizzo inserito. <br />
@@ -237,8 +263,8 @@
               </div>
             </div>
             <div class="modal-footer my-cart-buttons">
-              <button id="back-to-cart" type="button" class="btn btn-ricom" data-bs-dismiss="modal">No</button>
-              <button id="go-checkout" type="submit" form="checkout-form" class="btn btn-regala-fill">Si!</button>
+              <button type="button" class="btn btn-ricom" data-bs-dismiss="modal">No</button>
+              <button type="button" class="btn btn-regala-fill">Si!</button>
               <button
                 id="back-to-cart"
                 type="button"
@@ -253,7 +279,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
     </section>
 
     <footer id="foot">
@@ -277,7 +303,16 @@
       <div class="container credits">© 2021, Tom and Berry.</div>
     </footer>
     <script src="/js/papaparse.min.js"></script>
-    <!-- <script src="/js/listanozze.js"></script> -->
+    <script src="/js/listanozze.js"></script>
     <script src="/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/aos.js"></script>
+    <script src="/js/confetti.min.js"></script>
+    <script>
+      AOS.init({
+        duration: 900,
+        easing: "ease-out-back",
+        delay: 100,
+      });
+    </script>
   </body>
 </html>

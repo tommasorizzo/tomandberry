@@ -225,6 +225,26 @@ button > * {
 }
 
 // RSVP
+.hero-rsvp {
+  background: url("../img/bg.png") center center;
+  background-position: center center;
+  background-size: cover;
+  min-height: 500px;
+  // background-color: rgba(153, 147, 147, 0.267);
+  // background-blend-mode: multiply;
+  position: relative;
+}
+
+.hero-rsvp-content {
+  padding-top: 10vh;
+  padding-bottom: 1rem;
+  text-align: center;
+  img {
+    height: 400px;
+    width: auto;
+  }
+}
+
 .rsvp-text {
   max-width: 700px;
   margin-top: 10px;
@@ -321,9 +341,9 @@ button > * {
   }
 }
 
-#cart-row-and-modal {
-  display: none;
-}
+// #cart-row-and-modal {
+//   display: none;
+// }
 
 .my-cart {
   position: fixed;
@@ -456,6 +476,21 @@ button > * {
   width: 90%;
   // border-top: 1px solid rgb(211, 209, 209);
   font-weight: bold;
+}
+
+.thankyou_message_cart {
+  margin-bottom: 15px;
+  margin-top: 15px;
+  // color: rgb(83, 156, 83);
+  text-align: start;
+  font-size: 16px;
+  // font-style: italic;
+}
+
+.scelta-box {
+  margin: 1rem 0;
+  border: 1px solid rgb(214, 138, 38);
+  border-radius: 6px;
 }
 
 // Footer

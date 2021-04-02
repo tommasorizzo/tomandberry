@@ -33,7 +33,7 @@ function showInfo(results) {
       disponibili_prod = prodotto["rimanenti"];
 
       to_append = `
-            <div class="prod" id="${id_prod}">
+            <div class="prod" id="${id_prod}" data-aos="zoom-in">
               <div class="prod-grid"">
                 <img class="prod-foto" src="${foto_prod}" alt="" />
                 <h4 class="prod-name">${nome_prod}</h4>
@@ -55,6 +55,14 @@ function showInfo(results) {
     }
   }
 
+  // check unavailable products
+  var products = document.getElementsByClassName("prod");
+  for (let i = 0; i < products.length; i++) {
+    product = products[i];
+    var disp = retrieveTotal(product, "prod-disp", 1);
+    if (disp == 0) disableClassBtn(product, "add-cart");
+  }
+
   // add to cart
   var itemToCart = document.getElementsByClassName("add-cart");
   for (let i = 0; i < itemToCart.length; i++) {
@@ -69,6 +77,11 @@ function showInfo(results) {
   var forms = document.querySelectorAll("#checkout-form");
   for (var i = 0; i < forms.length; i++) {
     forms[i].addEventListener("submit", handleFormSubmit, false);
+  }
+  // payment method
+  var radios = document.forms["checkout-form"].elements["metodo"];
+  for (let i = 0; i < radios.length; i++) {
+    radios[i].addEventListener("click", setPaymentMethod, false);
   }
 }
 
@@ -224,11 +237,14 @@ function emptyCart() {
 function retrieveCartItems() {
   var cartItems = document.getElementsByClassName("my-cart-items")[0];
   var cartItemNames = cartItems.getElementsByClassName("my-cart-item");
+  var cartItemList = {};
   for (var i = cartItemNames.length - 1; i >= 0; i--) {
     cartItem = cartItemNames[i];
     quantity = cartItem.getElementsByClassName("quant-input")[0].value;
     id = cartItem.id.split("-")[1];
+    cartItemList[id] = quantity;
   }
+  return cartItemList;
 }
 
 // enable and disable buttons
@@ -275,7 +291,6 @@ document.addEventListener("scroll", function () {
 // get all data in form and return object
 function getFormData(form) {
   var elements = form.elements;
-  console.log(elements);
   var fields = Object.keys(elements)
     .map(function (k) {
       if (elements[k].name !== undefined) {
@@ -310,8 +325,10 @@ function getFormData(form) {
   });
 
   // retrieve cart items
-  retrieveCartItems();
-
+  // formData["items"] = retrieveCartItems();
+  console.log(formData);
+  formData = Object.assign(formData, retrieveCartItems());
+  console.log(formData);
   return { data: formData };
 }
 
@@ -320,40 +337,66 @@ function handleFormSubmit(event) {
   event.preventDefault(); // we are submitting via xhr below
   var form = event.target;
   var formData = getFormData(form);
-  console.log(formData);
   var data = formData.data;
-  console.log(data);
 
-  // disableAllButtons(form);
-  // var url = form.action;
-  // var xhr = new XMLHttpRequest();
-  // xhr.open("POST", url);
-  // // xhr.withCredentials = true;
-  // xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-  // xhr.onreadystatechange = function () {
-  //   if (xhr.readyState === 4 && xhr.status === 200) {
-  //     form.reset();
-  //     var formElements = form.querySelector(".form-elements");
-  //     if (formElements) {
-  //       formElements.style.display = "none"; // hide form
-  //     }
-  //     var thankYouMessage = form.querySelector(".thankyou_message");
-  //     if (thankYouMessage) {
-  //       thankYouMessage.style.display = "block";
-  //     }
-  //   }
-  // };
-  // // url encode form data for sending as post data
-  // var encoded = Object.keys(data)
-  //   .map(function (k) {
-  //     return encodeURIComponent(k) + "=" + encodeURIComponent(data[k]);
-  //   })
-  //   .join("&");
-  // xhr.send(encoded);
+  disableAllButtons("confirm-btn");
+  var url = form.action;
+  var xhr = new XMLHttpRequest();
+  xhr.open("POST", url);
+  // xhr.withCredentials = true;
+  xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4 && xhr.status === 200) {
+      form.reset();
+      var formElements = form.querySelector(".form-elements");
+      if (formElements) {
+        formElements.style.display = "none"; // hide form
+      }
+      var thankYouMessage = document.querySelector(".thankyou_message_cart");
+      if (thankYouMessage) {
+        confetti.start(10000, 20, 100);
+        thankYouMessage.style.display = "block";
+      }
+    }
+  };
+  // url encode form data for sending as post data
+  var encoded = Object.keys(data)
+    .map(function (k) {
+      return encodeURIComponent(k) + "=" + encodeURIComponent(data[k]);
+    })
+    .join("&");
+  xhr.send(encoded);
 }
 
-function disableAllButtons(form) {
-  var buttons = form.querySelectorAll("button");
+function setPaymentMethod(event) {
+  if (event.target.id == "radio-paypal") {
+    methods = document.getElementsByClassName("method-confirm");
+    for (let i = 0; i < methods.length; i++) methods[i].innerHTML = "Paypal";
+    document.getElementsByClassName("scelta-paypal")[0].style.display = "block";
+    document.getElementsByClassName("scelta-bonifico")[0].style.display = "none";
+  } else if (event.target.id == "radio-bonifico") {
+    methods = document.getElementsByClassName("method-confirm");
+    for (let i = 0; i < methods.length; i++) methods[i].innerHTML = "Bonifico";
+    document.getElementsByClassName("scelta-paypal")[0].style.display = "none";
+    document.getElementsByClassName("scelta-bonifico")[0].style.display = "block";
+  }
+}
+
+function confirmfinish() {
+  document.getElementsByClassName("confirm-body")[0].style.display = "block";
+  document.getElementsByClassName("confirm-btn")[0].style.display = "block";
+  document.getElementsByClassName("checkout-btn")[0].style.display = "none";
+}
+
+function confirm_no() {
+  document.getElementsByClassName("confirm-body")[0].style.display = "none";
+  document.getElementsByClassName("confirm-btn")[0].style.display = "none";
+  document.getElementsByClassName("checkout-btn")[0].style.display = "block";
+}
+
+function disableAllButtons(classname) {
+  var content = document.getElementsByClassName(classname)[0];
+  var buttons = content.getElementsByTagName("button");
   for (var i = 0; i < buttons.length; i++) {
     buttons[i].disabled = true;
   }
