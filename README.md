@@ -1,3 +1,5 @@
-# Tommaso e Rebecca
-## 4 luglio 2021
-Repository del sito del nostro matrimonio: www.tomandberry.it.
+# Rebecca e Tommaso
+Ho fatto un sito per il nostro matrimonio: www.tomandberry.it.
+
+Questa è la repository dei file sorgente.
+
