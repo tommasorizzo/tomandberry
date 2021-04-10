@@ -1,3 +1,3 @@
-# Tommaso e Rebecca
-## 4 luglio 2021
+# Rebecca e Tommaso
 Repository del sito del nostro matrimonio: www.tomandberry.it.
+
