@@ -1,3 +1,4 @@
 # Rebecca e Tommaso
-Repository del sito del nostro matrimonio: www.tomandberry.it.
+Ho fatto un sito per il nostro matrimonio: www.tomandberry.it.
+Questa è la repository dei file sorgente.
 
