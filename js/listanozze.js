@@ -3,6 +3,9 @@ var listaSpreadsheet =
 
 var lista, cart, cartModal, footer;
 
+window.addEventListener("DOMContentLoaded", init);
+
+// init function
 function init() {
   lista = document.getElementById("lista");
   cart = document.getElementById("cart");
@@ -16,11 +19,13 @@ function init() {
   });
 }
 
+// called by init
 function showInfo(results) {
   var data = results.data;
 
   lista.innerHTML = "";
 
+  // create lista based on elements in spreadsheet
   for (var i = 0, len = data.length; i < len; i++) {
     if (data[i]["mostra"] == "TRUE") {
       prodotto = data[i];
@@ -60,8 +65,10 @@ function showInfo(results) {
   for (let i = 0; i < products.length; i++) {
     product = products[i];
     var disp = retrieveTotal(product, "prod-disp", 1);
-    if (disp == 0) disableClassBtn(product, "add-cart");
+    if (disp == 0) disableClassBtn(product, "add-cart"); // disable 'add-cart' button if unavailable
   }
+
+  // EVENT LISTENERS
 
   // add to cart
   var itemToCart = document.getElementsByClassName("add-cart");
@@ -78,6 +85,7 @@ function showInfo(results) {
   for (var i = 0; i < forms.length; i++) {
     forms[i].addEventListener("submit", handleFormSubmit, false);
   }
+
   // payment method
   var radios = document.forms["checkout-form"].elements["metodo"];
   for (let i = 0; i < radios.length; i++) {
@@ -85,7 +93,7 @@ function showInfo(results) {
   }
 }
 
-window.addEventListener("DOMContentLoaded", init);
+/***************** PRODUCT AND CHART HANDLER ******************/
 
 // add to cart and update cart total and disponibili
 function addToCart(event) {
@@ -125,6 +133,7 @@ function addItemToCart(product, quantity) {
       }
     }
   }
+  // create row element and assign 'my-cart-item' class
   cartRow.classList.add("my-cart-item");
   cartRow.classList.add("row");
   cartRow.setAttribute("id", "cart-" + prod_id);
@@ -156,15 +165,15 @@ function addItemToCart(product, quantity) {
 // update disp
 function updateDisp(product, quantity, direction) {
   old_disp = retrieveTotal(product, "prod-disp", 1);
-  if (old_disp == 0 && !direction) return; // attemp to go negative
+  if (old_disp == 0 && !direction) return; // attemp to go negative: return
   new_disp = direction ? old_disp + quantity : old_disp - quantity;
   product.getElementsByClassName("prod-disp")[0].innerHTML = `Disponibili: ${new_disp}`; // update disponibili
   if (new_disp > 0) enableClassBtn(product, "add-cart");
-  else disableClassBtn(product, "add-cart"); // disable add to cart button
+  else disableClassBtn(product, "add-cart"); // disable add to cart button if no more disp
   return;
 }
 
-// update total
+// update product total and update cart
 function updateTotal(cartItem, quantity) {
   price = retrieveTotal(cartItem, "my-cart-item-price", 0);
   total = quantity * price;
@@ -233,7 +242,20 @@ function emptyCart() {
   updateCart(); // all items removed -> updateCart() returns 0
 }
 
-// checkout
+// return price value as a number
+function retrieveTotal(target, classname, pos) {
+  total = target.getElementsByClassName(classname)[0].innerHTML;
+  var total = parseFloat(total.split(" ")[pos]);
+  if (isNaN(total)) {
+    return 0;
+  } else {
+    return total;
+  }
+}
+
+/********************** CHECKOUT **********************/
+
+// retrieve cart items to pass to form
 function retrieveCartItems() {
   var cartItems = document.getElementsByClassName("my-cart-items")[0];
   var cartItemNames = cartItems.getElementsByClassName("my-cart-item");
@@ -247,47 +269,6 @@ function retrieveCartItems() {
   return cartItemList;
 }
 
-// enable and disable buttons
-function disableClassBtn(product, classname) {
-  product.getElementsByClassName(classname)[0].disabled = true;
-}
-function enableClassBtn(product, classname) {
-  product.getElementsByClassName(classname)[0].disabled = false;
-}
-function disableIdBtn(id) {
-  document.getElementById(id).disabled = true;
-}
-function enableIdBtn(id) {
-  document.getElementById(id).disabled = false;
-}
-
-// return price value as a number
-function retrieveTotal(target, classname, pos) {
-  total = target.getElementsByClassName(classname)[0].innerHTML;
-  var total = parseFloat(total.split(" ")[pos]);
-  if (isNaN(total)) {
-    return 0;
-  } else {
-    return total;
-  }
-}
-
-// cart fixed position until footer
-function checkOffset() {
-  function getRectTop(el) {
-    var rect = el.getBoundingClientRect();
-    return rect.top;
-  }
-  if (getRectTop(cart) + document.body.scrollTop + cart.offsetHeight >= getRectTop(footer) + document.body.scrollTop - 10)
-    cart.style.position = "absolute";
-  if (document.body.scrollTop + window.innerHeight < getRectTop(footer) + document.body.scrollTop) cart.style.position = "fixed"; // restore when you scroll up
-}
-
-document.addEventListener("scroll", function () {
-  checkOffset();
-});
-
-/********************** CHECKOUT **********************/
 // get all data in form and return object
 function getFormData(form) {
   var elements = form.elements;
@@ -303,14 +284,11 @@ function getFormData(form) {
     .filter(function (item, pos, self) {
       return self.indexOf(item) == pos && item;
     });
-
   var formData = {};
   fields.forEach(function (name) {
     var element = elements[name];
-
     // singular form elements just have one value
     formData[name] = element.value;
-
     // when our element has multiple items, get their values
     if (element.length) {
       var data = [];
@@ -323,10 +301,7 @@ function getFormData(form) {
       formData[name] = data.join(", ");
     }
   });
-
   // retrieve cart items
-  // formData["items"] = retrieveCartItems();
-  console.log(formData);
   formData = Object.assign(formData, retrieveCartItems());
   console.log(formData);
   return { data: formData };
@@ -340,6 +315,7 @@ function handleFormSubmit(event) {
   var data = formData.data;
 
   disableAllButtons("confirm-btn");
+  emptyCartAfterPurch();
   var url = form.action;
   var xhr = new XMLHttpRequest();
   xhr.open("POST", url);
@@ -354,7 +330,7 @@ function handleFormSubmit(event) {
       }
       var thankYouMessage = document.querySelector(".thankyou_message_cart");
       if (thankYouMessage) {
-        confetti.start(10000, 20, 100);
+        confetti.start(6000, 20, 100);
         thankYouMessage.style.display = "block";
       }
     }
@@ -368,6 +344,7 @@ function handleFormSubmit(event) {
   xhr.send(encoded);
 }
 
+// check radio buttons to set payment method
 function setPaymentMethod(event) {
   if (event.target.id == "radio-paypal") {
     methods = document.getElementsByClassName("method-confirm");
@@ -382,6 +359,7 @@ function setPaymentMethod(event) {
   }
 }
 
+// double confirmation form functions
 function confirmfinish() {
   document.getElementsByClassName("confirm-body")[0].style.display = "block";
   document.getElementsByClassName("confirm-btn")[0].style.display = "block";
@@ -394,6 +372,33 @@ function confirm_no() {
   document.getElementsByClassName("checkout-btn")[0].style.display = "block";
 }
 
+// empty cart after purchase (do not restore disponibilii)
+function emptyCartAfterPurch() {
+  disableIdBtn("empty-cart"); // disable empty cart button
+  var cartItems = document.getElementsByClassName("my-cart-items")[0];
+  var cartItemNames = cartItems.getElementsByClassName("my-cart-item");
+  for (var i = cartItemNames.length - 1; i >= 0; i--) {
+    cartItem = cartItemNames[i];
+    cartItem.remove();
+  }
+  updateCart(); // all items removed -> updateCart() returns 0
+}
+/****************** AUXILIARY FUNCTIONS ********************/
+
+// enable and disable buttons
+function disableClassBtn(product, classname) {
+  product.getElementsByClassName(classname)[0].disabled = true;
+}
+function enableClassBtn(product, classname) {
+  product.getElementsByClassName(classname)[0].disabled = false;
+}
+function disableIdBtn(id) {
+  document.getElementById(id).disabled = true;
+}
+function enableIdBtn(id) {
+  document.getElementById(id).disabled = false;
+}
+
 function disableAllButtons(classname) {
   var content = document.getElementsByClassName(classname)[0];
   var buttons = content.getElementsByTagName("button");
@@ -401,3 +406,18 @@ function disableAllButtons(classname) {
     buttons[i].disabled = true;
   }
 }
+
+// place cart in fixed position until footer
+function checkOffset() {
+  function getRectTop(el) {
+    var rect = el.getBoundingClientRect();
+    return rect.top;
+  }
+  if (getRectTop(cart) + document.body.scrollTop + cart.offsetHeight >= getRectTop(footer) + document.body.scrollTop - 10)
+    cart.style.position = "absolute";
+  if (document.body.scrollTop + window.innerHeight < getRectTop(footer) + document.body.scrollTop) cart.style.position = "fixed"; // restore when you scroll up
+}
+
+document.addEventListener("scroll", function () {
+  checkOffset();
+});
