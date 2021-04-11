@@ -31,7 +31,8 @@ function showInfo(results) {
       prodotto = data[i];
 
       id_prod = prodotto["id"].toString();
-      foto_prod = "/" + prodotto["foto"];
+      foto_prod = "/foto-lista-nozze/" + prodotto["foto"] + ".jpg";
+      console.log(foto_prod);
       nome_prod = prodotto["nome"];
       prezzo_prod = prodotto["prezzo"];
       desc_prod = prodotto["descrizione"];
@@ -40,7 +41,10 @@ function showInfo(results) {
       to_append = `
             <div class="prod" id="${id_prod}" data-aos="zoom-in">
               <div class="prod-grid"">
-                <img class="prod-foto" src="${foto_prod}" alt="" />
+                <div class="foto-and-desc">
+                  <div class="prod-desc">${desc_prod}</div>
+                  <img class="prod-foto" src="${foto_prod}" alt="" />
+                </div>
                 <h4 class="prod-name">${nome_prod}</h4>
                 <span class="prod-price">Valore: ${prezzo_prod}</span>
                 <p class="prod-disp">Disponibili: ${disponibili_prod}</p>
