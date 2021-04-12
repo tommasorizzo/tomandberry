@@ -54,6 +54,8 @@ button > * {
   border: 1px solid rgb(236, 172, 89);
   color: rgb(236, 172, 89);
   border-radius: 6px;
+  font-size: 18px;
+  width: 180px;
   &:hover {
     background: rgb(236, 172, 89);
     color: #fff;
@@ -273,9 +275,6 @@ button > * {
 }
 
 // Lista Nozze
-#lista-nozze-go {
-  display: none;
-}
 
 .hero-ln {
   min-height: 500px;

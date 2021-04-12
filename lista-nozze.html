@@ -81,7 +81,12 @@
                 >
               </div>
             </li>
-            <li>Lista Nozze online, che potete vedere di seguito su questa pagina.</li>
+            <li>
+              Lista Nozze online, che potete vedere di seguito su questa pagina.
+              <div class="container text-center">
+                <button id="show-lista" class="btn btn-orange my-3 p-2" disabled>Lista Nozze online</button>
+              </div>
+            </li>
           </ul>
         </div>
       </div>
@@ -114,7 +119,7 @@
 
     <section id="lista" class="container lista-nozze my-4"></section>
 
-    <section id="cart-row-and-modal">
+    <section id="cart-row-and-modal" style="display: none">
       <div class="container d-flex flex-row-reverse position-relative">
         <div id="cart" class="my-cart" data-bs-toggle="modal" data-bs-target="#my-cart-modal">
           <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-gift-fill" viewBox="0 0 16 16">

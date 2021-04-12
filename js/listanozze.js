@@ -12,10 +12,17 @@ function init() {
   cartModal = document.getElementById("my-cart-modal");
   footer = document.getElementById("foot");
 
-  Papa.parse(listaSpreadsheet, {
-    download: true,
-    header: true,
-    complete: showInfo,
+  enableIdBtn("show-lista");
+
+  document.getElementById("show-lista").addEventListener("click", function (event) {
+    console.log("showing lista...");
+    event.target.style.display = "none";
+    Papa.parse(listaSpreadsheet, {
+      download: true,
+      header: true,
+      complete: showInfo,
+    });
+    document.getElementById("cart-row-and-modal").style.display = "block";
   });
 }
 
@@ -32,7 +39,6 @@ function showInfo(results) {
 
       id_prod = prodotto["id"].toString();
       foto_prod = "/foto-lista-nozze/" + prodotto["foto"] + ".jpg";
-      console.log(foto_prod);
       nome_prod = prodotto["nome"];
       prezzo_prod = prodotto["prezzo"];
       desc_prod = prodotto["descrizione"];
@@ -95,6 +101,12 @@ function showInfo(results) {
   for (let i = 0; i < radios.length; i++) {
     radios[i].addEventListener("click", setPaymentMethod, false);
   }
+}
+
+/***************** SHOW LISTA ******************/
+
+function showLista() {
+  lista.style.display = "block";
 }
 
 /***************** PRODUCT AND CHART HANDLER ******************/
