@@ -48,6 +48,10 @@ function showInfo(results) {
             <div class="prod" id="${id_prod}" data-aos="zoom-in">
               <div class="prod-grid"">
                 <div class="foto-and-desc">
+                  <div class="prod-sold">
+                    <img class="sold-regalo" src="/img/regalo.png" alt="" />
+                    <div>Regalo già fatto!</div>
+                  </div>
                   <div class="prod-desc">${desc_prod}</div>
                   <img class="prod-foto" src="${foto_prod}" alt="" />
                 </div>
@@ -75,7 +79,9 @@ function showInfo(results) {
   for (let i = 0; i < products.length; i++) {
     product = products[i];
     var disp = retrieveTotal(product, "prod-disp", 1);
-    if (disp == 0) disableClassBtn(product, "add-cart"); // disable 'add-cart' button if unavailable
+    if (disp == 0) disableClassBtn(product, "add-cart");
+    // disable 'add-cart' button if unavailable
+    else product.getElementsByClassName("prod-sold")[0].style.display = "none";
   }
 
   // EVENT LISTENERS
@@ -399,6 +405,7 @@ function emptyCartAfterPurch() {
   }
   updateCart(); // all items removed -> updateCart() returns 0
 }
+
 /****************** AUXILIARY FUNCTIONS ********************/
 
 // enable and disable buttons

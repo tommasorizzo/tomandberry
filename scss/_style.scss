@@ -65,13 +65,13 @@ button > * {
 // Hero
 .hero {
   min-height: 500px;
-  background: url("../img/ter.jpg") center center;
+  background: url("/img/ter.jpg") center center;
   background-color: rgba(153, 147, 147, 0.267);
   background-blend-mode: multiply;
   background-size: cover;
   position: relative;
   @media (max-width: 580px) {
-    background-image: url("../img/ter_media.jpg");
+    background-image: url("/img/ter_media.jpg");
   }
 }
 .hero-content {
@@ -128,7 +128,7 @@ button > * {
 .chiesa {
   height: 300px;
   width: auto;
-  background-image: url("../img/scroce.jpg");
+  background-image: url("/img/scroce.jpg");
   background-position: center center;
   background-size: cover;
   background-color: rgba(73, 69, 69, 0.404);
@@ -168,7 +168,7 @@ button > * {
     }
   }
   @media (max-width: 760px) {
-    background-image: url("../img/bg.png");
+    background-image: url("/img/bg.png");
     background-position: center center;
     background-size: cover;
   }
@@ -228,7 +228,7 @@ button > * {
 
 // RSVP
 .hero-rsvp {
-  background: url("../img/bg.png") center center;
+  background: url("/img/bg.png") center center;
   background-position: center center;
   background-size: cover;
   min-height: 500px;
@@ -278,7 +278,7 @@ button > * {
 
 .hero-ln {
   min-height: 500px;
-  background: url("../img/braccia.jpg") center center;
+  background: url("/img/braccia.jpg") center center;
   background-size: cover;
   position: relative;
 }
@@ -321,22 +321,41 @@ button > * {
       object-fit: contain;
       transition: all 0.5s ease;
     }
-  }
-  .foto-and-desc {
-    position: relative;
-    width: 200px;
-    height: auto;
-  }
-  .prod-desc {
-    float: left;
-    position: absolute;
-    z-index: 1000;
-    padding: 5px;
-    top: 20%;
-    display: none;
-    font-style: italic;
-    border-top: 1px solid rgba(94, 93, 93, 0.425);
-    border-bottom: 1px solid rgba(94, 93, 93, 0.425);
+
+    .foto-and-desc {
+      position: relative;
+      width: 200px;
+      height: auto;
+    }
+    .prod-desc {
+      float: left;
+      position: absolute;
+      z-index: 1000;
+      padding: 5px;
+      top: 20%;
+      display: none;
+      font-style: italic;
+      border-top: 1px solid rgba(94, 93, 93, 0.425);
+      border-bottom: 1px solid rgba(94, 93, 93, 0.425);
+    }
+    .prod-sold {
+      background: rgba(252, 252, 252, 0.74);
+      position: absolute;
+      z-index: 900;
+      padding: 5px;
+      top: 20%;
+      margin-left: auto;
+      margin-right: auto;
+      left: 0;
+      right: 0;
+      font-style: italic;
+      img {
+        width: auto;
+        height: 50px;
+        object-fit: contain;
+        transition: all 0.5s ease;
+      }
+    }
   }
   .prod-buy {
     padding: 0 1rem 1rem 1rem;
@@ -348,6 +367,11 @@ button > * {
   &:hover {
     background: #fff;
     box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5);
+    .prod-sold {
+      position: absolute;
+      z-index: -1;
+      display: none;
+    }
     .prod-desc {
       display: block;
     }
