@@ -10,6 +10,7 @@
   background: hsla(0, 0%, 0%, 0.9);
   padding-bottom: 35px;
   z-index: 2000;
+  transform: translate3d(0, 0, 200px);
 }
 
 .flickity-enabled.is-fullscreen .flickity-page-dots {
