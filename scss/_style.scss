@@ -65,13 +65,13 @@ button > * {
 // Hero
 .hero {
   min-height: 500px;
-  background: url("/img/ter.jpg") center center;
+  background: url("../img/ter.jpg") center center;
   background-color: rgba(153, 147, 147, 0.267);
   background-blend-mode: multiply;
   background-size: cover;
   position: relative;
   @media (max-width: 580px) {
-    background-image: url("/img/ter_media.jpg");
+    background-image: url("../img/ter_media.jpg");
   }
 }
 .hero-content {
@@ -128,15 +128,13 @@ button > * {
 .chiesa {
   height: 300px;
   width: auto;
-  background-image: url("/img/scroce.jpg");
+  background-image: url("../img/scroce.jpg");
   background-position: center center;
   background-size: cover;
   background-color: rgba(73, 69, 69, 0.404);
   background-blend-mode: multiply;
   display: flex;
   align-items: center;
-  // padding-top: 2rem;
-  // position: relative;
   text-align: center;
   h5,
   h4,
@@ -168,7 +166,7 @@ button > * {
     }
   }
   @media (max-width: 760px) {
-    background-image: url("/img/bg.png");
+    background-image: url("../img/bg.png");
     background-position: center center;
     background-size: cover;
   }
@@ -196,6 +194,123 @@ button > * {
     width: 20px;
     height: 20px;
     fill: rgb(228, 171, 17);
+  }
+}
+
+// foto carousel
+$foto-bg: rgba(150, 223, 226, 0.404);
+
+.foto-years {
+  padding: 30px 5px;
+}
+
+.foto-title {
+  font-family: "Dancing Script";
+  font-size: 40px;
+  color: $txt-primary;
+  align-items: center;
+  padding-bottom: 20px;
+}
+
+.main-carousel {
+  padding: 0 60px;
+  position: relative;
+  max-width: 880px;
+  margin: auto;
+  @media (max-width: 580px) {
+    padding: 0;
+  }
+}
+
+.carousel-cell {
+  margin-right: 10px;
+  height: 310px;
+  text-align: center;
+  .carousel-top {
+    height: 10px;
+  }
+  .carousel-image {
+    width: auto;
+    height: 300px;
+    border: 3px solid whitesmoke;
+    border-radius: 12px;
+    @media (max-width: 580px) {
+      height: 200px;
+    }
+  }
+  .carousel-year {
+    position: absolute;
+    left: 50%;
+    top: 8%;
+    transform: translate(-50%, -50%) rotate(-5deg);
+    font-size: 24px;
+    text-align: center;
+    color: #283140;
+    background-color: #c7cdd3;
+    padding: 2px 10px;
+    border-radius: 8px;
+    @media (max-width: 580px) {
+      font-size: 16px;
+    }
+  }
+  .carousel-capt {
+    display: none;
+  }
+  @media (max-width: 580px) {
+    height: 250px;
+  }
+}
+
+.main-carousel.is-fullscreen {
+  max-width: 100%;
+  .carousel-cell {
+    width: 100%;
+    height: 100%;
+    // max-height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .carousel-image {
+    display: block;
+    max-height: 90%;
+    height: auto;
+    max-width: 95%;
+  }
+  .carousel-year {
+    display: block;
+    color: whitesmoke;
+    background: none;
+    transform: none;
+    position: relative;
+    left: auto;
+    top: auto;
+    font-size: 30px;
+    font-style: italic;
+    font-weight: 500;
+    @media (max-width: 580px) {
+      font-size: 20px;
+    }
+  }
+  .carousel-capt {
+    display: none;
+    width: 90%;
+    color: whitesmoke;
+    text-align: center;
+    font-style: italic;
+  }
+}
+
+.flickity-button {
+  background: none;
+}
+
+.flickity-prev-next-button {
+  width: 30px;
+  height: 30px;
+  @media (max-width: 580px) {
+    display: none;
   }
 }
 
@@ -228,7 +343,7 @@ button > * {
 
 // RSVP
 .hero-rsvp {
-  background: url("/img/bg.png") center center;
+  background: url("../img/bg.png") center center;
   background-position: center center;
   background-size: cover;
   min-height: 500px;
@@ -278,7 +393,7 @@ button > * {
 
 .hero-ln {
   min-height: 500px;
-  background: url("/img/braccia.jpg") center center;
+  background: url("../img/braccia.jpg") center center;
   background-size: cover;
   position: relative;
 }

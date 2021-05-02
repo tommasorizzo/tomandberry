@@ -61,7 +61,7 @@
         </div>
       </nav>
       <div class="hero-rsvp-content" data-aos="fade-up">
-        <img src="/img/part.png" alt="" />
+        <img src="img/part.png" alt="" />
       </div>
     </section>
 
@@ -78,8 +78,15 @@
         <div class="form-elements">
           <div class="row mb-3">
             <label for="email" class="col-sm-2 col-form-label">Email</label>
-            <div class="col-sm-10">
+            <div class="col-sm-6">
               <input type="email" class="form-control" id="email" name="email" placeholder="Inserisci la tua email" required />
+            </div>
+            <label for="partecipa" class="col-sm-2 col-form-label">Parteciperai</label>
+            <div class="col-sm-2">
+              <select class="form-select" id="partecipa" name="partecipa">
+                <option value="Si">Si</option>
+                <option value="No">No</option>
+              </select>
             </div>
           </div>
           <div class="row mb-3">
@@ -149,9 +156,9 @@
       <div class="container credits">© 2021, Tom and Berry.</div>
     </footer>
 
-    <script src="/js/bootstrap.bundle.min.js"></script>
-    <script src="/js/form-rsvp.js"></script>
-    <script src="/js/aos.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/form-rsvp.js"></script>
+    <script src="js/aos.js"></script>
     <script>
       AOS.init({
         duration: 1200,

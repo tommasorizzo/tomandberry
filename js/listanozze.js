@@ -79,8 +79,9 @@ function showInfo(results) {
   for (let i = 0; i < products.length; i++) {
     product = products[i];
     var disp = retrieveTotal(product, "prod-disp", 1);
-    if (disp == 0) disableClassBtn(product, "add-cart");
     // disable 'add-cart' button if unavailable
+    if (disp == 0) disableClassBtn(product, "add-cart");
+    // else remove 'sold' element
     else product.getElementsByClassName("prod-sold")[0].style.display = "none";
   }
 
