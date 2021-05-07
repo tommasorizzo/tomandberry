@@ -226,7 +226,6 @@ $foto-bg: rgba(150, 223, 226, 0.404);
   margin-right: 10px;
   height: 310px;
   text-align: center;
-  cursor: pointer;
   .carousel-top {
     height: 10px;
   }
@@ -235,6 +234,7 @@ $foto-bg: rgba(150, 223, 226, 0.404);
     height: 300px;
     border: 3px solid whitesmoke;
     border-radius: 12px;
+    cursor: pointer;
     @media (max-width: 580px) {
       height: 200px;
     }
