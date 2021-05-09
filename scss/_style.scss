@@ -650,6 +650,36 @@ $foto-bg: rgba(150, 223, 226, 0.404);
   border-radius: 6px;
 }
 
+// Canti
+#canti-messa {
+  .container-canti {
+    width: 90%;
+    margin: auto;
+  }
+  h4 {
+    font-size: 20px;
+    font-weight: 600;
+  }
+  li {
+    font-size: 20px;
+  }
+  .spartito {
+    margin-right: 20px;
+  }
+  .btn-video {
+    border: 1px solid rgb(211, 48, 48);
+    color: rgb(211, 48, 48);
+    background: #fff;
+    border-radius: 6px;
+    font-size: 14px;
+    padding: 4px 8px;
+    &:hover {
+      background: rgb(211, 48, 48);
+      color: #fff;
+    }
+  }
+}
+
 // Footer
 
 footer {
