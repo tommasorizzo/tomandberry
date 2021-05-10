@@ -651,6 +651,15 @@ $foto-bg: rgba(150, 223, 226, 0.404);
 }
 
 // Canti
+.hero-coro {
+  min-height: 500px;
+  background: url("../img/scroce.jpg") center center;
+  background-color: rgba(255, 255, 255, 0.267);
+  background-blend-mode: multiply;
+  background-size: cover;
+  position: relative;
+}
+
 #canti-messa {
   .container-canti {
     width: 90%;
