@@ -80,7 +80,10 @@ function showInfo(results) {
     product = products[i];
     var disp = retrieveTotal(product, "prod-disp", 1);
     // disable 'add-cart' button if unavailable
-    if (disp == 0) disableClassBtn(product, "add-cart");
+    if (disp == 0) {
+      disableClassBtn(product, "add-cart");
+      product.getElementsByClassName("prod-price")[0].style.visibility = "hidden";
+    }
     // else remove 'sold' element
     else product.getElementsByClassName("prod-sold")[0].style.display = "none";
   }
