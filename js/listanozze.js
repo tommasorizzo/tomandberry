@@ -22,6 +22,8 @@ function init() {
       header: true,
       complete: showInfo,
     });
+    document.getElementById("lista-merlini").style.display = "block";
+    document.getElementById("regalo-nozze").style.display = "block";
     document.getElementById("cart-row-and-modal").style.display = "block";
   });
 }
@@ -30,7 +32,7 @@ function init() {
 function showInfo(results) {
   var data = results.data;
 
-  lista.innerHTML = "";
+  // lista.innerHTML = "";
 
   // create lista based on elements in spreadsheet
   for (var i = 0, len = data.length; i < len; i++) {
@@ -46,7 +48,7 @@ function showInfo(results) {
 
       to_append = `
             <div class="prod" id="${id_prod}" data-aos="zoom-in">
-              <div class="prod-grid"">
+              <div class="prod-grid">
                 <div class="foto-and-desc">
                   <div class="prod-sold">
                     <img class="sold-regalo" src="/img/regalo.png" alt="" />
