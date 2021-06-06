@@ -118,7 +118,7 @@
     <div class="container lista-nozze-cs my-4">*** Under development. Coming soon! ***</div>
 
     <section id="lista" class="container lista-nozze my-4">
-      <!-- <div class="prod" id="lista-merlini" data-aos="zoom-in" style="display: none">
+      <div class="prod prod-extra" id="listaMerlini" data-aos="zoom-in" style="display: none">
         <div class="prod-grid">
           <div class="foto-and-desc">
             <img class="prod-foto" src="/foto-lista-nozze/lista_merlini.png" alt="" />
@@ -127,7 +127,7 @@
           <span>Scegli qualcosa dalla Lista Merlini e comunicalo direttamente a noi</span>
         </div>
         <div class="prod-buy">
-          <button class="btn btn-brown add-cart mt-4">
+          <button class="btn btn-brown mt-4" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#lista-merlini-modal">
             <span class="svg-butt">Regala </span>
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gift" viewBox="0 0 16 16">
               <path
@@ -137,14 +137,20 @@
           </button>
         </div>
       </div>
-      <div class="prod" id="regalo-nozze" data-aos="zoom-in" style="display: none">
+      <div class="prod prod-extra" id="regaloNozze" data-aos="zoom-in" style="display: none">
         <div class="prod-grid">
           <div class="foto-and-desc">
-            <div class="prod-desc">Sicilia 2021!</div>
-            <img class="prod-foto" src="/foto-lista-nozze/lista_merlini.png" alt="" />
+            <div class="prod-desc mt-2">
+              Aiutaci ad andare in viaggio di nozze: <br />
+              Sicilia 2021 on the road!
+            </div>
+            <img class="prod-foto" src="/foto-lista-nozze/sicilia.png" alt="" />
           </div>
           <h4 class="prod-name">Viaggio di Nozze</h4>
-          <span class="prod-price">Valore: __</span>
+          <div class="col-md-4 pb-2 contributo">
+            <span class="contr-label">Contributo: </span>
+            <input type="number" class="form-control prod-price contr-input" placeholder="0" aria-label="contrib" required />
+          </div>
         </div>
         <div class="prod-buy">
           <button class="btn btn-orange add-cart mt-4">
@@ -156,7 +162,7 @@
             </svg>
           </button>
         </div>
-      </div> -->
+      </div>
     </section>
 
     <section id="cart-row-and-modal" style="display: none">
@@ -284,6 +290,104 @@
               <div class="confirm-btn" style="display: none">
                 <button type="button" class="btn btn-ricom" onclick="confirm_no();">No</button>
                 <button type="submit" form="checkout-form" class="btn btn-regala-fill">Si!</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="scelta-lista-merlini">
+      <div class="modal fade" id="lista-merlini-modal" tabindex="-1" aria-labelledby="lista-merlini-label" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="title">Lista Nozze Merlini</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form
+                id="merlini-form"
+                method="POST"
+                action="https://script.google.com/macros/s/AKfycbyvku580rPv3k7pwzOSkeuyes_Jh67U83a043SjQM7VwLREY-A/exec"
+              >
+                <div class="container mb-3">
+                  <div class="form-elements">
+                    <div class="row mb-3">
+                      <label for="merlini" class="form-label"
+                        >Comunicaci cosa desideri prendere dalla Lista Nozze Merlini (specifica oggetti e quantità):</label
+                      >
+                      <textarea class="form-control" id="merlini" name="merlini" rows="3" placeholder="Scrivi qualcosa..." required></textarea>
+                    </div>
+                    <div class="row mb-3 align-items-center">
+                      <div class="col-sm-8">
+                        <label for="prezzo" class="form-label">Valore totale di ciò che hai scelto:</label>
+                      </div>
+                      <div class="col-sm-4 d-flex align-items-center">
+                        <span style="margin-right: 10px">€</span>
+                        <input type="number" class="form-control" id="prezzo" name="prezzo" required />
+                      </div>
+                    </div>
+                    <div class="row mb-3">
+                      <label for="m-email" class="col-sm-2 col-form-label">Email</label>
+                      <div class="col-sm-10">
+                        <input type="email" class="form-control" id="m-email" name="email" placeholder="Inserisci la tua email" required />
+                      </div>
+                    </div>
+                    <div class="row mb-3">
+                      <label for="m-nome" class="col-sm-4 col-form-label">Nome e Cognome</label>
+                      <div class="col-sm-8">
+                        <input class="form-control" id="m-nome" name="nome" placeholder="Nome e cognome" required />
+                      </div>
+                    </div>
+                    <div class="row mb-3">
+                      <label for="m-messaggio" class="form-label">Inserisci un messaggio:</label>
+                      <textarea class="form-control" id="m-messaggio" name="messaggio" rows="3" placeholder="Scrivi qualcosa..."></textarea>
+                    </div>
+                    <div class="row mb-3">
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="metodo" id="m-radio-bonifico" value="bonifico" checked />
+                        <label class="form-check-label" for="radio-bonifico"> Bonifico </label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="metodo" id="m-radio-paypal" value="paypal" />
+                        <label class="form-check-label" for="radio-paypal"> Paypal </label>
+                      </div>
+                    </div>
+                    <div class="confirm-body" style="display: none">
+                      Hai scelto di utilizzare <span class="method-confirm" style="font-style: italic">Bonifico</span>. Vuoi continuare? <br />
+                      Così facendo confermerai la tua scelta!
+                    </div>
+                  </div>
+                </div>
+              </form>
+              <div class="container thankyou_message_merl py-2" style="display: none">
+                Vi ringraziamo di cuore per il vostro contributo. <br />
+                Un'email con il riepilogo dei regali vi arriverà all'indirizzo inserito. <br />
+                Avete scelto di pagare tramite <span class="method-confirm">Bonifico</span>.
+                <div class="scelta-box">
+                  <div class="container scelta-bonifico py-3">
+                    Ecco le nostre coordinate bancarie: <br />
+                    <div class="text-center">
+                      Intestato a: D'Andrea Rebecca, Rizzo Tommaso <br />
+                      IBAN: IT06O0344216000000016053679
+                    </div>
+                  </div>
+                  <div class="container scelta-paypal py-3" style="display: none">
+                    Potete procedere al pagamento al seguente link: <a href="https://paypal.me/tomandberry">paypal.me/tomandberry</a>.
+                  </div>
+                </div>
+                Per qualsiasi cosa non esitate a contattarci!
+              </div>
+            </div>
+            <div class="modal-footer my-cart-buttons">
+              <div class="checkout-btn">
+                <button type="button" class="btn btn-ricom" data-bs-dismiss="modal" data-bs-toggle="modal">Indietro</button>
+                <button id="m-go-checkout" class="btn btn-regala-fill" onclick="confirmfinish();">Conferma</button>
+              </div>
+              <div class="confirm-btn" style="display: none">
+                <button type="button" class="btn btn-ricom" onclick="confirm_no();">No</button>
+                <button type="submit" form="merlini-form" class="btn btn-regala-fill">Si!</button>
               </div>
             </div>
           </div>

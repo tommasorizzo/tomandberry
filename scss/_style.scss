@@ -509,6 +509,19 @@ $foto-bg: rgba(150, 223, 226, 0.404);
   }
 }
 
+.contributo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .contr-label {
+    margin-right: 10px;
+  }
+  .contr-input {
+    width: 60px;
+    padding: 6px;
+  }
+}
+
 // #cart-row-and-modal {
 //   display: none;
 // }

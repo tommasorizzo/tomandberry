@@ -22,8 +22,8 @@ function init() {
       header: true,
       complete: showInfo,
     });
-    document.getElementById("lista-merlini").style.display = "block";
-    document.getElementById("regalo-nozze").style.display = "block";
+    document.getElementById("listaMerlini").style.display = "block";
+    document.getElementById("regaloNozze").style.display = "block";
     document.getElementById("cart-row-and-modal").style.display = "block";
   });
 }
@@ -80,6 +80,7 @@ function showInfo(results) {
   var products = document.getElementsByClassName("prod");
   for (let i = 0; i < products.length; i++) {
     product = products[i];
+    if (product.classList.contains("prod-extra")) continue;
     var disp = retrieveTotal(product, "prod-disp", 1);
     // disable 'add-cart' button if unavailable
     if (disp == 0) {
@@ -103,9 +104,14 @@ function showInfo(results) {
   document.getElementById("empty-cart").addEventListener("click", emptyCart);
 
   // checkout
-  var forms = document.querySelectorAll("#checkout-form");
-  for (var i = 0; i < forms.length; i++) {
-    forms[i].addEventListener("submit", handleFormSubmit, false);
+  var ch_forms = document.querySelectorAll("#checkout-form");
+  for (var i = 0; i < ch_forms.length; i++) {
+    ch_forms[i].addEventListener("submit", handleFormSubmit, false);
+  }
+
+  var me_forms = document.querySelectorAll("#merlini-form");
+  for (var i = 0; i < me_forms.length; i++) {
+    me_forms[i].addEventListener("submit", handleFormSubmit, false);
   }
 
   // payment method
@@ -126,9 +132,19 @@ function showLista() {
 // add to cart and update cart total and disponibili
 function addToCart(event) {
   var product = event.target.parentNode.parentNode;
-  var to_add = retrieveTotal(product, "prod-price", 1);
-  addItemToCart(product, 1);
-  updateDisp(product, 1, 0);
+  var to_add = 0;
+  if (product.classList.contains("prod-extra")) {
+    to_add = product.getElementsByClassName("prod-price")[0].value;
+    if (to_add == "") return;
+    else {
+      product.getElementsByClassName("prod-price")[0].value = "";
+      addTripToCart(product, to_add);
+    }
+  } else {
+    to_add = retrieveTotal(product, "prod-price", 1);
+    addItemToCart(product, 1);
+    updateDisp(product, 1, 0);
+  }
   updateCart();
 }
 
@@ -181,6 +197,53 @@ function addItemToCart(product, quantity) {
                       <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
                         <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
                       </svg>
+                      <span class="my-cart-item-price">${price} €</span>
+                  </div>
+                  <div class="my-cart-item-total" hidden>${price}</div>
+                `;
+
+  cartRow.innerHTML = cartRowContents;
+  cartItems.append(cartRow);
+}
+
+function addTripToCart(product, to_add) {
+  // reitrieve product data
+  var name = product.getElementsByClassName("prod-name")[0].innerHTML;
+  var prod_id = product.id;
+  var price = parseFloat(to_add);
+  var foto = product.getElementsByClassName("prod-foto")[0].src;
+  // create div element
+  var cartRow = document.createElement("div");
+  var cartItems = document.getElementsByClassName("my-cart-items")[0];
+  var old_cart = retrieveTotal(cart, "cart-tot", 0);
+  if (old_cart != 0) {
+    // cart not empty
+    // check if element already present in cart
+    var cartItemNames = cartItems.getElementsByClassName("my-cart-item");
+    for (var i = 0; i < cartItemNames.length; i++) {
+      cartItem = cartItemNames[i];
+      cartItemName = cartItem.getElementsByClassName("my-cart-item-name")[0].innerHTML;
+      if (cartItemName == name) {
+        // if element already present in cart => update quantity
+        old_price = retrieveTotal(cartItem, "my-cart-item-price", 0);
+        new_price = old_price + price;
+        cartItem.getElementsByClassName("my-cart-item-price")[0].innerHTML = `${new_price} €`;
+        cartItem.getElementsByClassName("my-cart-item-total")[0].innerHTML = `${new_price}`;
+        return;
+      }
+    }
+  }
+  // create row element and assign 'my-cart-item' class
+  cartRow.classList.add("my-cart-item");
+  cartRow.classList.add("my-cart-item-extra");
+  cartRow.classList.add("row");
+  cartRow.setAttribute("id", "cart-" + prod_id);
+  var cartRowContents = `
+                  <div class="col-sm-7 my-cart-item-descr">
+                      <img class="col-sm-3 my-cart-item-image" src="${foto}" />
+                      <span class="col-sm-4 my-cart-item-name pt-1 ms-2">${name}</span>
+                  </div>
+                  <div class="col-sm-5 pt-1 my-cart-item-quant">
                       <span class="my-cart-item-price">${price} €</span>
                   </div>
                   <div class="my-cart-item-total" hidden>${price}</div>
@@ -260,11 +323,13 @@ function emptyCart() {
   for (var i = cartItemNames.length - 1; i >= 0; i--) {
     // parse all cart items and restore disponibili
     cartItem = cartItemNames[i];
-    item_quantity = cartItem.getElementsByClassName("quant-input")[0].value;
-    prod_id = cartItem.id.split("-")[1];
-    product = document.getElementById(prod_id);
-    updateDisp(product, parseFloat(item_quantity), 1);
-    enableClassBtn(product, "add-cart");
+    if (!cartItem.classList.contains("my-cart-item-extra")) {
+      item_quantity = cartItem.getElementsByClassName("quant-input")[0].value;
+      prod_id = cartItem.id.split("-")[1];
+      product = document.getElementById(prod_id);
+      updateDisp(product, parseFloat(item_quantity), 1);
+      enableClassBtn(product, "add-cart");
+    }
     cartItem.remove();
   }
   updateCart(); // all items removed -> updateCart() returns 0
@@ -290,7 +355,10 @@ function retrieveCartItems() {
   var cartItemList = {};
   for (var i = cartItemNames.length - 1; i >= 0; i--) {
     cartItem = cartItemNames[i];
-    quantity = cartItem.getElementsByClassName("quant-input")[0].value;
+    if (cartItem.classList.contains("my-cart-item-extra")) {
+      quantity = cartItem.getElementsByClassName("my-cart-item-total")[0].innerHTML;
+      quantity = parseFloat(quantity);
+    } else quantity = cartItem.getElementsByClassName("quant-input")[0].value;
     id = cartItem.id.split("-")[1];
     cartItemList[id] = quantity;
   }
@@ -361,6 +429,11 @@ function handleFormSubmit(event) {
         confetti.start(6000, 20, 100);
         thankYouMessage.style.display = "block";
       }
+      var thankYouMessageMerl = document.querySelector(".thankyou_message_merl");
+      if (thankYouMessageMerl) {
+        confetti.start(6000, 20, 100);
+        thankYouMessageMerl.style.display = "block";
+      }
     }
   };
   // url encode form data for sending as post data
@@ -389,15 +462,30 @@ function setPaymentMethod(event) {
 
 // double confirmation form functions
 function confirmfinish() {
-  document.getElementsByClassName("confirm-body")[0].style.display = "block";
-  document.getElementsByClassName("confirm-btn")[0].style.display = "block";
-  document.getElementsByClassName("checkout-btn")[0].style.display = "none";
+  str = ["confirm-body", "confirm-btn", "checkout-btn"];
+  for (let i = 0; i < str.length; i++) {
+    elem = document.getElementsByClassName(str[i]);
+    for (let j = 0; j < elem.length; j++) {
+      const el = elem[j];
+      if (i == 2) el.style.display = "none";
+      else el.style.display = "block";
+    }
+  }
 }
 
 function confirm_no() {
-  document.getElementsByClassName("confirm-body")[0].style.display = "none";
-  document.getElementsByClassName("confirm-btn")[0].style.display = "none";
-  document.getElementsByClassName("checkout-btn")[0].style.display = "block";
+  str = ["confirm-body", "confirm-btn", "checkout-btn"];
+  for (let i = 0; i < str.length; i++) {
+    elem = document.getElementsByClassName(str[i]);
+    for (let j = 0; j < elem.length; j++) {
+      const el = elem[j];
+      if (i == 2) el.style.display = "block";
+      else el.style.display = "none";
+    }
+  }
+  // document.getElementsByClassName("confirm-body")[0].style.display = "none";
+  // document.getElementsByClassName("confirm-btn")[0].style.display = "none";
+  // document.getElementsByClassName("checkout-btn")[0].style.display = "block";
 }
 
 // empty cart after purchase (do not restore disponibilii)
@@ -429,10 +517,13 @@ function enableIdBtn(id) {
 }
 
 function disableAllButtons(classname) {
-  var content = document.getElementsByClassName(classname)[0];
-  var buttons = content.getElementsByTagName("button");
-  for (var i = 0; i < buttons.length; i++) {
-    buttons[i].disabled = true;
+  var contents = document.getElementsByClassName(classname);
+  for (let j = 0; j < contents.length; j++) {
+    const content = contents[j];
+    var buttons = content.getElementsByTagName("button");
+    for (var i = 0; i < buttons.length; i++) {
+      buttons[i].disabled = true;
+    }
   }
 }
 
