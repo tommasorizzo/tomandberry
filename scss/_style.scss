@@ -1,0 +1,746 @@
+// Global
+
+body {
+  background-color: whitesmoke;
+}
+.container {
+  max-width: 880px;
+}
+
+p {
+  font-size: $font-size-p;
+  line-height: $base-line-height;
+  color: $p-color;
+}
+
+h1 {
+  font-size: $font-size-h1;
+}
+
+h2 {
+  font-size: $font-size-h2;
+  font-weight: $w-light;
+  color: $h2-color;
+}
+
+h3 {
+  color: $h3-color;
+  font-size: $font-size-h3;
+  font-weight: $w-semibold;
+  line-height: $base-line-height;
+}
+
+h4 {
+  font-size: $font-size-h4;
+}
+
+h5 {
+  font-size: $font-size-h5;
+  color: $h5-color;
+  font-weight: $w-bold;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+button > * {
+  pointer-events: none;
+}
+
+.btn-orange {
+  border: 1px solid rgb(236, 172, 89);
+  color: rgb(236, 172, 89);
+  border-radius: 6px;
+  font-size: 18px;
+  width: 180px;
+  &:hover {
+    background: rgb(236, 172, 89);
+    color: #fff;
+  }
+}
+
+$brown: rgb(161, 126, 29);
+.btn-brown {
+  border: 1px solid $brown;
+  color: $brown;
+  border-radius: 6px;
+  font-size: 18px;
+  width: 180px;
+  &:hover {
+    color: #fff;
+    background: $brown;
+  }
+}
+
+// Hero
+.hero {
+  min-height: 500px;
+  background: url("../img/ter.jpg") center center;
+  background-color: rgba(153, 147, 147, 0.267);
+  background-blend-mode: multiply;
+  background-size: cover;
+  position: relative;
+  @media (max-width: 580px) {
+    background-image: url("../img/ter_media.jpg");
+  }
+}
+.hero-content {
+  padding-top: 40vh;
+  padding-bottom: 1rem;
+  text-align: center;
+  img {
+    height: auto;
+    width: 400px;
+    max-width: 90%;
+  }
+}
+.navbar {
+  padding: 0 0;
+  background-color: rgba(56, 56, 56, 0.247);
+  width: auto;
+  margin: 0 auto;
+  transition: padding 300ms ease-in-out;
+}
+
+.container-nav {
+  padding: 10px 10px;
+  width: 90%;
+  display: inline-block;
+}
+
+.nav-link {
+  font-size: large;
+}
+
+// Ci sposiamo
+.ci-sposiamo {
+  background-color: whitesmoke;
+}
+.cd-title {
+  font-family: "Dancing Script";
+  font-size: 60px;
+  color: $txt-primary;
+}
+
+.cd-data {
+  font-family: "Dancing Script";
+  font-size: 40px;
+  color: $txt-primary;
+}
+
+.cd-time {
+  font-family: "Dancing Script";
+  font-size: 30px;
+  color: $txt-primary;
+}
+
+// Cerimonia
+.chiesa {
+  height: 300px;
+  width: auto;
+  background-image: url("../img/scroce.jpg");
+  background-position: center center;
+  background-size: cover;
+  background-color: rgba(73, 69, 69, 0.404);
+  background-blend-mode: multiply;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  h5,
+  h4,
+  p {
+    color: whitesmoke;
+  }
+}
+
+// Noi 2
+.noi-2 {
+  background-image: url("../img/bg.png");
+  background-position: center center;
+  background-size: cover;
+  // display: none;
+  @media (max-width: 760px) {
+    background-image: none;
+  }
+}
+
+.noi-2-part {
+  img {
+    max-height: 500px;
+    height: auto;
+    width: auto;
+    @media (max-width: 760px) {
+      max-width: 60%;
+      height: auto;
+      width: auto;
+    }
+  }
+  @media (max-width: 760px) {
+    background-image: url("../img/bg.png");
+    background-position: center center;
+    background-size: cover;
+  }
+}
+
+.noi-2-box {
+  padding: 1rem;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.8);
+  .noi-2-text {
+    text-align: start;
+  }
+  .noi-2-firme {
+    text-align: end;
+  }
+  span {
+    vertical-align: middle;
+  }
+  .svg-heart {
+    width: 16px;
+    height: 16px;
+    fill: rgb(192, 19, 19);
+  }
+  .svg-smile {
+    width: 20px;
+    height: 20px;
+    fill: rgb(228, 171, 17);
+  }
+}
+
+// foto carousel
+$foto-bg: rgba(150, 223, 226, 0.404);
+
+.foto-years {
+  padding: 30px 5px;
+}
+
+.foto-title {
+  font-family: "Dancing Script";
+  font-size: 40px;
+  color: $txt-primary;
+  align-items: center;
+  padding-bottom: 20px;
+}
+
+.main-carousel {
+  padding: 0 60px;
+  position: relative;
+  max-width: 880px;
+  margin: auto;
+  @media (max-width: 580px) {
+    padding: 0;
+  }
+}
+
+.carousel-cell {
+  margin-right: 10px;
+  height: 310px;
+  text-align: center;
+  .carousel-top {
+    height: 10px;
+  }
+  .carousel-image {
+    width: auto;
+    height: 300px;
+    border: 3px solid whitesmoke;
+    border-radius: 12px;
+    cursor: pointer;
+    @media (max-width: 580px) {
+      height: 200px;
+    }
+  }
+  .carousel-year {
+    position: absolute;
+    left: 50%;
+    top: 8%;
+    transform: translate(-50%, -50%) rotate(-5deg);
+    font-size: 24px;
+    text-align: center;
+    color: #283140;
+    background-color: #c7cdd3;
+    padding: 2px 10px;
+    border-radius: 8px;
+    @media (max-width: 580px) {
+      font-size: 16px;
+    }
+  }
+  .carousel-capt {
+    display: none;
+  }
+  @media (max-width: 580px) {
+    height: 250px;
+  }
+}
+
+.main-carousel.is-fullscreen {
+  max-width: 100%;
+  .carousel-cell {
+    width: 100%;
+    height: 100%;
+    // max-height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .carousel-image {
+    display: block;
+    max-height: 90%;
+    height: auto;
+    max-width: 95%;
+  }
+  .carousel-year {
+    display: block;
+    color: whitesmoke;
+    background: none;
+    transform: none;
+    position: relative;
+    left: auto;
+    top: auto;
+    font-size: 30px;
+    font-style: italic;
+    font-weight: 500;
+    @media (max-width: 580px) {
+      font-size: 20px;
+    }
+  }
+  .carousel-capt {
+    display: none;
+    width: 90%;
+    color: whitesmoke;
+    text-align: center;
+    font-style: italic;
+  }
+}
+
+.flickity-button {
+  background: none;
+}
+
+.flickity-prev-next-button {
+  width: 30px;
+  height: 30px;
+  @media (max-width: 580px) {
+    display: none;
+  }
+}
+
+// Countdown
+.cd-num {
+  text-align: center;
+  color: $txt-secondary;
+  p {
+    color: $txt-secondary;
+    margin-bottom: 0;
+  }
+}
+
+.cd-manc {
+  text-align: center;
+  color: $txt-secondary;
+  font-size: 20px;
+}
+
+.cd-icon {
+  margin-top: 0.6rem;
+  margin-right: 0.5rem;
+  text-align: center;
+  color: $txt-secondary;
+  @media (max-width: 580px) {
+    padding-bottom: 1rem;
+    // visibility: hidden;
+  }
+}
+
+// RSVP
+.hero-rsvp {
+  background: url("../img/bg.png") center center;
+  background-position: center center;
+  background-size: cover;
+  min-height: 500px;
+  // background-color: rgba(153, 147, 147, 0.267);
+  // background-blend-mode: multiply;
+  position: relative;
+}
+
+.hero-rsvp-content {
+  padding-top: 10vh;
+  padding-bottom: 1rem;
+  text-align: center;
+  img {
+    height: 400px;
+    width: auto;
+  }
+}
+
+.rsvp-text {
+  max-width: 700px;
+  margin-top: 10px;
+  padding-top: 2rem;
+  text-align: justify;
+}
+.rsvp-cont {
+  max-width: 700px;
+  button {
+    background-color: rgb(33, 123, 175) !important;
+  }
+  h4 {
+    color: rgb(33, 123, 175);
+  }
+  border: 1.5px solid rgb(33, 123, 175);
+  border-radius: 8px;
+}
+
+.thankyou_message {
+  margin-bottom: 15px;
+  margin-top: 15px;
+  color: rgb(83, 156, 83);
+  text-align: center;
+  font-size: 18px;
+  font-style: italic;
+}
+
+// Lista Nozze/Nascita
+
+.hero-ln {
+  min-height: 500px;
+  background: url("../img/braccia.jpg") center center;
+  background-size: cover;
+  position: relative;
+}
+
+.hero-lnas {
+  min-height: 500px;
+  background: url("../img/vestitini.jpg") center center;
+  background-size: cover;
+  position: relative;
+}
+
+.lista-nozze-cs {
+  text-align: center;
+  font-size: large;
+  font-style: italic;
+  color: rgb(226, 97, 97);
+  display: none;
+}
+
+.lista-nozze {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 10px;
+}
+
+.prod {
+  min-width: 200px;
+  border: 1px solid rgb(211, 209, 209);
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: all 0.2s ease-in;
+  .prod-grid {
+    text-align: center;
+    padding: 1rem 1rem 0 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+    h4 {
+      padding-top: 10px;
+    }
+    .foto-and-desc {
+      position: relative;
+      width: 200px;
+      height: auto;
+    }
+    .prod-sold {
+      background: rgba(252, 252, 252, 0.74);
+      position: absolute;
+      z-index: 900;
+      padding-top: 20px;
+      left: 0;
+      right: 0;
+      font-style: italic;
+      height: 120px;
+      img {
+        width: auto;
+        height: 50px;
+        object-fit: contain;
+        transition: all 0.5s ease;
+      }
+    }
+    .prod-desc {
+      // float: left;
+      position: absolute;
+      z-index: 1000;
+      padding: 10px;
+      height: 120px;
+      display: none;
+      font-style: italic;
+      border-top: 1px solid rgba(94, 93, 93, 0.425);
+      border-bottom: 1px solid rgba(94, 93, 93, 0.425);
+    }
+    img {
+      width: auto;
+      height: auto;
+      max-width: 200px;
+      max-height: 120px;
+      object-fit: contain;
+      transition: all 0.5s ease;
+    }
+  }
+  .prod-buy {
+    padding: 0 1rem 1rem 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  }
+  &:hover {
+    background: #fff;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5);
+    .prod-sold {
+      position: absolute;
+      z-index: -1;
+      display: none;
+    }
+    .prod-desc {
+      display: block;
+    }
+    img {
+      opacity: 0.3;
+      transform: scale(1.1);
+    }
+  }
+}
+
+.contributo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .contr-label {
+    margin-right: 10px;
+  }
+  .contr-input {
+    width: 60px;
+    padding: 6px;
+  }
+}
+
+// #cart-row-and-modal {
+//   display: none;
+// }
+
+.my-cart {
+  position: fixed;
+  bottom: 2px;
+  margin-right: 10px;
+  padding: 0.8rem;
+  background: rgb(236, 172, 89);
+  border-radius: 6px 6px 0 0;
+  color: #fff;
+  font-size: 20px;
+  overflow: hidden;
+  cursor: pointer;
+  svg {
+    width: 1.5rem;
+    fill: #fff;
+    height: 1.5rem;
+    margin-right: 0.3rem;
+  }
+  &:hover {
+    background: rgb(214, 138, 38);
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5);
+  }
+}
+
+.svg-butt {
+  vertical-align: middle;
+}
+
+.my-cart-items {
+  margin: auto;
+  text-align: center;
+  justify-content: center;
+  width: 95%;
+}
+
+.my-cart-item {
+  border-bottom: 1px solid rgb(211, 209, 209);
+  padding-bottom: 1rem;
+  padding-top: 1rem;
+  align-items: center;
+  text-align: center;
+  margin: 0;
+  justify-content: space-between;
+  img {
+    height: 100px;
+    max-width: 100px;
+    object-fit: contain;
+    @media (max-width: 580px) {
+      margin-right: auto;
+      margin-left: auto;
+    }
+  }
+  .my-cart-item-quant {
+    padding-left: 1rem;
+    display: flex;
+    align-items: center;
+    text-align: end;
+    .quant-input {
+      height: 34px;
+      width: 1.6rem;
+      border: none;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      font-size: 16px;
+      // margin-left: 5px;
+    }
+    .quant-butt {
+      width: 22px;
+      height: 22px;
+      fill: rgb(236, 172, 89);
+      cursor: pointer;
+      transition: all 0.5 ease;
+      &:hover {
+        fill: rgb(184, 181, 181);
+      }
+    }
+    svg {
+      margin: 0 3px 0 3px;
+    }
+    @media (max-width: 580px) {
+      text-align: center;
+      justify-content: center;
+    }
+  }
+  .my-cart-item-price {
+    font-size: 16px;
+  }
+  .my-cart-item-descr {
+    text-align: start;
+    @media (max-width: 580px) {
+      text-align: center;
+      justify-content: center;
+    }
+  }
+}
+
+.my-cart-buttons {
+  .btn {
+    color: #fff;
+    height: 40px;
+  }
+  .btn-ricom {
+    background: rgb(180, 180, 180);
+    border-radius: 6px;
+    &:hover {
+      background: rgb(116, 116, 116);
+    }
+  }
+  .btn-regala-fill {
+    background: rgb(236, 172, 89);
+    border-radius: 6px;
+    &:hover {
+      background: rgb(214, 138, 38);
+    }
+  }
+  svg {
+    margin-left: 3px;
+    width: 1.2rem;
+    fill: #fff;
+    height: 1.2rem;
+  }
+}
+
+.my-cart-total {
+  align-items: center;
+  text-align: end;
+  padding-bottom: 1rem;
+  margin: auto;
+  width: 90%;
+  // border-top: 1px solid rgb(211, 209, 209);
+  font-weight: bold;
+}
+
+.thankyou_message_cart {
+  margin-bottom: 15px;
+  margin-top: 15px;
+  // color: rgb(83, 156, 83);
+  text-align: start;
+  font-size: 16px;
+  // font-style: italic;
+}
+
+.scelta-box {
+  margin: 1rem 0;
+  border: 1px solid rgb(214, 138, 38);
+  border-radius: 6px;
+}
+
+// Canti
+.hero-coro {
+  min-height: 500px;
+  background: url("../img/scroce.jpg") center center;
+  background-color: rgba(255, 255, 255, 0.267);
+  background-blend-mode: multiply;
+  background-size: cover;
+  position: relative;
+}
+
+#canti-messa {
+  .container-canti {
+    width: 90%;
+    margin: auto;
+  }
+  h4 {
+    font-size: 20px;
+    font-weight: 600;
+  }
+  li {
+    font-size: 20px;
+  }
+  .spartito {
+    margin-right: 20px;
+  }
+  .btn-video {
+    border: 1px solid rgb(211, 48, 48);
+    color: rgb(211, 48, 48);
+    background: #fff;
+    border-radius: 6px;
+    font-size: 14px;
+    padding: 4px 8px;
+    &:hover {
+      background: rgb(211, 48, 48);
+      color: #fff;
+    }
+  }
+}
+
+// Footer
+
+footer {
+  background-color: rgba(255, 240, 197, 0.534);
+  padding: 1rem;
+}
+
+.contatti {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.cont-tom {
+  padding: 10px;
+}
+.cont-reb {
+  padding: 10px;
+  @media (min-width: 580px) {
+    text-align: end;
+  }
+}
+.credits {
+  padding-top: 2rem;
+}
