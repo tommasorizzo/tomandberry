@@ -403,11 +403,18 @@ $foto-bg: rgba(150, 223, 226, 0.404);
   font-style: italic;
 }
 
-// Lista Nozze
+// Lista Nozze/Nascita
 
 .hero-ln {
   min-height: 500px;
   background: url("../img/braccia.jpg") center center;
+  background-size: cover;
+  position: relative;
+}
+
+.hero-lnas {
+  min-height: 500px;
+  background: url("../img/vestitini.jpg") center center;
   background-size: cover;
   position: relative;
 }
@@ -427,7 +434,7 @@ $foto-bg: rgba(150, 223, 226, 0.404);
 }
 
 .prod {
-  min-width: 200 px;
+  min-width: 200px;
   border: 1px solid rgb(211, 209, 209);
   background-color: white;
   border-radius: 8px;
