@@ -10914,18 +10914,25 @@ button > * {
   background: rgb(161, 126, 29);
 }
 
+.btn-intro {
+  border: 1px solid rgb(167, 194, 121);
+  background: rgb(167, 194, 121);
+  color: #d04b7c;
+  border-radius: 6px;
+  font-size: 18px;
+  width: 150px;
+}
+.btn-intro:hover {
+  background: #d04b7c;
+  color: #fff;
+}
+
 .hero {
-  min-height: 500px;
-  background: url("../img/ter.jpg") center center;
+  min-height: 1200px;
+  background: url("../img/braccia.jpg") center center;
   background-color: rgba(153, 147, 147, 0.267);
   background-blend-mode: multiply;
   background-size: cover;
-  position: relative;
-}
-@media (max-width: 580px) {
-  .hero {
-    background-image: url("../img/ter_media.jpg");
-  }
 }
 
 .hero-content {
