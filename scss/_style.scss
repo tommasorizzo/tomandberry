@@ -9,7 +9,7 @@ body {
 
 p {
   font-size: $font-size-p;
-  line-height: $base-line-height;
+  // line-height: 25px;
   color: $p-color;
 }
 
@@ -732,6 +732,34 @@ $foto-bg: rgba(150, 223, 226, 0.404);
   }
 }
 
+// Battesimo
+
+.hero-batt {
+  min-height: 300px;
+  background: url("../img/battesimo.jpg") center center;
+  background-size: cover;
+  position: relative;
+}
+
+.batt-acc {
+  color: rgb(38, 56, 124);
+}
+
+.batt-gen{
+  margin-left: 20px;
+}
+
+.batt-parola {
+  color: rgb(14, 93, 60);
+}
+
+.batt-sac {
+  color: rgb(192, 120, 38);
+}
+
+.batt-fine{
+  color: rgb(18, 167, 213);
+}
 // Footer
 
 footer {

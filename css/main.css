@@ -10848,8 +10848,7 @@ body {
 }
 
 p {
-  font-size: 15px;
-  line-height: 29px;
+  font-size: 18px;
   color: #3d4351;
 }
 
@@ -10875,7 +10874,7 @@ h4, .h4 {
 }
 
 h5, .h5 {
-  font-size: 15px;
+  font-size: 14px;
   color: #3d4351;
   font-weight: 700;
 }
@@ -11630,6 +11629,33 @@ button > * {
 #canti-messa .btn-video:hover {
   background: rgb(211, 48, 48);
   color: #fff;
+}
+
+.hero-batt {
+  min-height: 300px;
+  background: url("../img/battesimo.jpg") center center;
+  background-size: cover;
+  position: relative;
+}
+
+.batt-acc {
+  color: rgb(38, 56, 124);
+}
+
+.batt-gen {
+  margin-left: 20px;
+}
+
+.batt-parola {
+  color: rgb(14, 93, 60);
+}
+
+.batt-sac {
+  color: rgb(192, 120, 38);
+}
+
+.batt-fine {
+  color: rgb(18, 167, 213);
 }
 
 footer {
